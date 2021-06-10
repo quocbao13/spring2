@@ -1,0 +1,127 @@
+<div class="col-lg-3" style="position: fixed; bottom: 0; right: 0; z-index: 1000;" *ngIf="message1" >
+  <aside class="sidebar static">
+    <div class="widget friend-list stick-widget">
+      <div class="d-flex justify-content-around align-items-center px-2"><h4 class="widget-title mb-0">Bạn bè</h4>
+        <button style="outline: unset; border: unset; background: none" (click)="showGroupChat()"><i
+          class="fas fa-plus-square fa-2x"></i></button>
+      </div>
+      <div class="px-4 my-2" style="background: transparent; border: none">
+        <form class="d-flex justify-content-center" [formGroup]="formGroupName" *ngIf="isCreateGroupChat"
+              (ngSubmit)="createGroupChat(formGroupName.value)">
+          <input   style="background: white; border: 1px solid #eaeaea;color: #575757; padding: 5px 10px; " type="text" placeholder="Nhập tên nhóm" formControlName="roomname"
+             >
+<!--          matInput     [errorStateMatcher]="matcher"-->
+          <!-- <span *ngIf="!formGroupName.get('roomname').valid && formGroupName.get('roomname').touched">Enter room name</span>-->
+          <button type="submit" [disabled]="formGroupName.invalid">Tạo</button>
+        </form>
+      </div>
+      <div style="max-height: 400px; overflow: auto">
+        <table mat-table [dataSource]="rooms" class="example-table"
+               matSort matSortActive="roomname" matSortDisableClear matSortDirection="asc">
+          <!-- Room Name Column -->
+          <ng-container matColumnDef="roomname">
+            <th mat-header-cell class="px-2" *matHeaderCellDef>
+              <div id="searchDir">
+                <div class="filterform" action="#"><input class="filterinput" type="text" placeholder="Tìm bạn ..."
+                                                          (input)="search($event.target.value)">
+                </div>
+              </div>
+            </th>
+            <figure style="text-align: left;">
+              <td mat-cell *matCellDef="let row" style="text-align: left; float: left; width: 100%">
+                <div class="float-left" style="margin: 3px 0">
+                  <img src="{{row.avatar}}" alt="" width="40px" height="40px"
+                       style="border-radius: 50%; border: 1px solid #aaaaaa">
+                  <span class="status f-online" style="position: relative; bottom: -15px; right: 11px"></span>
+                </div>
+                <div  class="d-flex align-items-center justify-content-between float-left" style="line-height: 40px; margin-left: 10px" >
+                  <a (click)="show(row.roomname)" style="cursor: pointer">{{row.nickNameFriend}}</a>
+                </div>
+                <div style="float: right; padding-top: 10px">
+                  <i style="cursor: pointer" class="fas fa-plus-square" *ngIf="isAddMember"
+                     (click)="addNewMember(row.nickNameFriend)"></i>
+                </div>
+              </td>
+            </figure>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"  ></tr>
+<!--          <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="show(row.roomname)" style="cursor: pointer"></tr>-->
+        </table>
+      </div>
+    </div><!-- friends list sidebar -->
+  </aside>
+</div><!-- sidebar -->
+
+<mat-drawer-container style="{{styleChatBox}}" *ngIf="message1">
+  <!--    Hiển thị tin nhắn///////////////-->
+  <mat-drawer-content class="chat-pane" style="width: 340px; height: 60px; position: relative; top: 0px; z-index: 1000">
+    <div class="chat-head ">
+      <span class="status f-online"></span>
+      <div class="dropdown">
+        <!--        <span>{{roomname}}</span>-->
+        <button class="dropbtn" style="height: 30px; padding: 0 10px" (click)="myFunction()">{{roomname}}
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content" id="myDropdown">
+          <a [routerLink]="['/profile/' + idFriend]">Truy cập trang cá nhân</a>
+          <a href="#">Thêm thành viên</a>
+          <button class="dropbtn" style="height: 30px; padding: 0 10px" (click)="myFunction1()">Xem thành viên
+          </button>
+          <div class="dropdown-content" id="myDropdown1">
+            <span *ngFor="let member of members">
+              <a>{{member.nickname}}</a>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="more">
+        <span><i class="fas fa-plus-square" (click)="showAddNewMember(roomname)"></i></span>
+        <span><i class="ti-more-alt"></i></span>
+        <span (click)="close() "><i class="ti-close"></i></span>
+      </div>
+    </div>
+  </mat-drawer-content>
+  <mat-drawer-content class="chat-pane" style="width: 340px; height: 300px; position: relative; top: 0px; z-index: 1">
+    <!--    <mat-drawer-content class="chat-pane">-->
+    <div #chatcontent class="chat-content" id="parentDiv">
+<!--      <button (click)="scrollBottom()"></button>-->
+      <div class="message-box" *ngFor="let chat of chats">
+        <div class="chat-status" text-center *ngIf="chat.type==='join'||chat.type==='exit';else message">
+          <span class="chat-date">{{chat.date | date:'short'}}</span>
+          <span class="chat-content-center">{{chat.message}}</span>
+        </div>
+        <ng-template #message>
+          <div class="chat-message">
+            <div class="right-bubble"
+                 [ngClass]="{'right-bubble': chat.id ===  id, 'left-bubble': chat.id !== id}">
+              <span class="msg-name" *ngIf="chat.nickname === nickname">Me</span>
+              <span class="msg-name" *ngIf="chat.nickname !== nickname">{{chat.nickname}}</span>
+              <span class="msg-date"> at {{chat.date}}</span>
+              <p text-wrap>{{chat.message}}</p>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+    <!--    scroll-->
+    <div id="content"></div>
+  </mat-drawer-content>
+  <mat-drawer-content>
+    <div class="" style="height: 60px; background: #d9d9d9">
+      <!--      <footer >-->
+      <form class="" [formGroup]="chatForm" (ngSubmit)="onFormSubmit(chatForm.value)">
+        <mat-form-field style="width: 90%; margin-left: 5%">
+          <input matInput placeholder="Enter message here" formControlName="message"
+                 [errorStateMatcher]="matcher">
+          <button type="submit" [disabled]="!chatForm.valid" mat-button matSuffix mat-icon-button aria-label="Send" >
+            <mat-icon>send</mat-icon>
+          </button>
+        </mat-form-field>
+      </form>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>
+
+
+

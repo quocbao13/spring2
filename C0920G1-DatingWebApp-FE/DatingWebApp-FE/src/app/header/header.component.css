@@ -1,0 +1,91 @@
+.top-area > ul.main-menu > li::after {
+  content: none;
+}
+
+.top-area > ul.main-menu {
+  margin-left: 200px;
+}
+
+.top-area > ul.main-menu > li {
+  margin-right: 80px;
+}
+
+.topbar {
+  height: 80px;
+  padding: 10px 48px;
+}
+
+.dropdowns.languages {
+  width: 300px;
+}
+
+.nav-tabs {
+  border-bottom: none;
+}
+
+.top-area {
+  padding-right: 30px;
+}
+
+.dropdowns.active > a {
+  text-align: left;
+}
+
+.dropdowns > a.more-mesg {
+  text-transform: none;
+}
+
+.nav-tabs .nav-link.active {
+  background-color: #e2e2e2;
+  border-bottom: #e2e2e2;
+  font-weight: bold;
+}
+
+#people-list figure img,
+.new-postbox > figure img,
+.friend-info > figure img,
+.comet-avatar > img,
+.followers > li figure img,
+.invition figure img,
+.nearly-pepls > figure img,
+.peoples > li figure img,
+.conversation-head > figure img,
+.peoples-mesg-box > ul li > figure img,
+.your-page > figure img,
+.notification-box > ul li figure img {
+  border-radius: 50%;
+}
+
+.nearby-contct img {
+  height: 50px;
+}
+
+a.add-butn {
+  width: 120px;
+  text-align: center;
+  text-transform: none;
+}
+
+/*img{*/
+/*    height: 0px;*/
+/*}*/
+#footer {
+  background: #121d24;
+  padding: 0 0 30px 0;
+  color: #fff;
+  font-size: 14px;
+}
+
+footer::before {
+  background: white;
+}
+
+.dmca {
+  cursor: pointer;
+}
+
+.dmca:hover {
+  color: red;
+}
+
+/*# sourceMappingURL=header.component.css.map */

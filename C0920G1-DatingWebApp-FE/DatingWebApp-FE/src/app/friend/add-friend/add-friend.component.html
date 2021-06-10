@@ -1,0 +1,256 @@
+<!-- Duong Nguyen Bao -->
+<div class="theme-layout">
+  <section>
+    <div class="feature-photo">
+      <figure><img src="assets/images/resources/timeline-1.jpg" alt=""></figure>
+      <div class="add-btn" *ngIf="userId != accountId">
+        <!-- Hiển thị phía người gửi lời mời -->
+        <a (click)="addFriend()" style="cursor: pointer;" id="status">{{button}}</a>
+        <!-- Hiển thị phía người nhận lời mời -->
+        <a (click)="deleteFriendRequest(accountId, userId)" class="add-butn more-action" [id]="userId + '_1'"
+           style="width: 70px; text-align: center; cursor: pointer;"
+           *ngIf="statusId == 4">{{deleteRequest}}</a>
+        <a (click)="confirmFriend(accountId, userId)" class="add-butn" [id]="userId + '_2'"
+           style="width: 70px; text-align: center; cursor: pointer;" *ngIf="statusId == 4">{{confirm}}</a>
+        <!-- Sau khi click để chuyển trạng thái -->
+        <a class="add-butn more-action" [id]="userId + '_3'" style="width: 90px; text-align: center;" hidden>Đã
+          từ chối</a>
+        <a class="add-butn" [id]="userId + '_4'" style="width: 90px; text-align: center;" hidden>✓
+          Bạn bè</a>
+      </div>
+
+      <form class="edit-phto" *ngIf="userId == accountId">
+        <i class="fa fa-camera-retro"></i>
+        <label class="fileContainer">
+          Sửa ảnh bìa
+          <input type="file"/>
+        </label>
+      </form>
+      <div class="container-fluid">
+        <div class="row merged">
+          <div class="col-lg-2 col-sm-3">
+            <div class="user-avatar">
+              <figure>
+                <img src="assets/images/resources/user-avatar.jpg" alt="">
+                <form class="edit-phto" *ngIf="userId == accountId">
+                  <i class="fa fa-camera-retro"></i>
+                  <label class="fileContainer">
+                    Sửa ảnh đại diện
+                    <input type="file"/>
+                  </label>
+                </form>
+              </figure>
+            </div>
+          </div>
+          <div class="col-lg-10 col-sm-9">
+            <div class="timeline-info">
+              <ul>
+                <li class="admin-name">
+                  <h5>Janice Griffith</h5>
+                  <!-- <span>Group Admin</span> -->
+                </li>
+                <li>
+                  <a class="" href="time-line.html" title="" data-ripple="">dòng thời gian</a>
+                  <a class="" href="timeline-photos.html" title="" data-ripple="">ảnh</a>
+                  <a class="" href="timeline-videos.html" title="" data-ripple="">Videos</a>
+                  <a class="active" href="timeline-friends.html" title="" data-ripple="">bạn
+                    bè</a>
+                  <a class="" href="timeline-groups.html" title="" data-ripple="">nhóm</a>
+                  <a class="" href="about.html" title="" data-ripple="">thông tin</a>
+                  <a class="" href="#" title="" data-ripple="">khác</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section><!-- top area -->
+
+  <section style="background-color: black ;">
+    <div class="gap gray-bg">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="row" id="page-contents">
+              <div class="col-lg-3">
+                <aside class="sidebar static">
+                </aside>
+              </div><!-- sidebar -->
+              <div class="col-lg-6">
+                <div class="central-meta" *ngIf="userId == accountId">
+                  <div class="frnds">
+                    <ul class="nav nav-tabs">
+                      <!-- <li class="nav-item"><a class="active" href="#frends" data-toggle="tab">Bạn Của Tôi</a> <span>55</span></li> -->
+                      <li class="nav-item"><a class="" href="#frends-req" data-toggle="tab">Yêu
+                        Cầu Kết Bạn</a><span>{{listLength}}</span></li>
+                    </ul>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                      <div class="tab-pane active fade show " id="frends">
+                        <ul class="nearby-contct">
+                          <li>
+                            <div class="nearly-pepls">
+                              <figure>
+                                <a href="time-line.html" title=""><img src="images/resources/friend-avatar9.jpg" alt=""></a>
+                              </figure>
+                              <div class="pepl-info">
+                                <h4><a href="time-line.html" title="">jhon kates</a></h4>
+                                <span>ftv model</span>
+                                <a href="#" title="" class="add-butn more-action" data-ripple="">unfriend</a>
+                                <a href="#" title="" class="add-butn" data-ripple="">add friend</a>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="nearly-pepls">
+                              <figure>
+                                <a href="time-line.html" title=""><img src="images/resources/nearly1.jpg" alt=""></a>
+                              </figure>
+                              <div class="pepl-info">
+                                <h4><a href="time-line.html" title="">sophia Gate</a></h4>
+                                <span>tv actresses</span>
+                                <a href="#" title="" class="add-butn more-action" data-ripple="">unfriend</a>
+                                <a href="#" title="" class="add-butn" data-ripple="">add friend</a>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="nearly-pepls">
+                              <figure>
+                                <a href="time-line.html" title=""><img src="images/resources/nearly2.jpg" alt=""></a>
+                              </figure>
+                              <div class="pepl-info">
+                                <h4><a href="time-line.html" title="">sara grey</a></h4>
+                                <span>work at IBM</span>
+                                <a href="#" title="" class="add-butn more-action" data-ripple="">unfriend</a>
+                                <a href="#" title="" class="add-butn" data-ripple="">add friend</a>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="nearly-pepls">
+                              <figure>
+                                <a href="time-line.html" title=""><img src="images/resources/nearly3.jpg" alt=""></a>
+                              </figure>
+                              <div class="pepl-info">
+                                <h4><a href="time-line.html" title="">Sexy cat</a></h4>
+                                <span>Student</span>
+                                <a href="#" title="" class="add-butn more-action" data-ripple="">unfriend</a>
+                                <a href="#" title="" class="add-butn" data-ripple="">add friend</a>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="nearly-pepls">
+                              <figure>
+                                <a href="time-line.html" title=""><img src="images/resources/nearly4.jpg" alt=""></a>
+                              </figure>
+                              <div class="pepl-info">
+                                <h4><a href="time-line.html" title="">Sara grey</a></h4>
+                                <span>ftv model</span>
+                                <a href="#" title="" class="add-butn more-action" data-ripple="">unfriend</a>
+                                <a href="#" title="" class="add-butn" data-ripple="">add friend</a>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="nearly-pepls">
+                              <figure>
+                                <a href="time-line.html" title=""><img src="images/resources/nearly5.jpg" alt=""></a>
+                              </figure>
+                              <div class="pepl-info">
+                                <h4><a href="time-line.html" title="">Amy watson</a></h4>
+                                <span>Study in university</span>
+                                <a href="#" title="" class="add-butn more-action" data-ripple="">unfriend</a>
+                                <a href="#" title="" class="add-butn" data-ripple="">add friend</a>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="nearly-pepls">
+                              <figure>
+                                <a href="time-line.html" title=""><img src="images/resources/nearly6.jpg" alt=""></a>
+                              </figure>
+                              <div class="pepl-info">
+                                <h4><a href="time-line.html" title="">caty lasbo</a></h4>
+                                <span>work as dancers</span>
+                                <a href="#" title="" class="add-butn more-action" data-ripple="">unfriend</a>
+                                <a href="#" title="" class="add-butn" data-ripple="">add friend</a>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="nearly-pepls">
+                              <figure>
+                                <a href="time-line.html" title=""><img src="images/resources/nearly2.jpg" alt=""></a>
+                              </figure>
+                              <div class="pepl-info">
+                                <h4><a href="time-line.html" title="">Ema watson</a></h4>
+                                <span>personal business</span>
+                                <a href="#" title="" class="add-butn more-action" data-ripple="">unfriend</a>
+                                <a href="#" title="" class="add-butn" data-ripple="">add friend</a>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                        <div class="lodmore">
+                          <button class="btn-view btn-load-more"></button>
+                        </div>
+                      </div>
+                      <div class="tab-pane fade active show" id="frends-req">
+                        <div *ngIf="listLength == 0" style="text-align: center; color: gray;">
+                          Chưa có yêu cầu nào
+                        </div>
+                        <ul class="nearby-contct">
+                          <li *ngFor="let friendRequest of friendRequestList">
+                            <div class="nearly-pepls">
+                              <figure>
+                                <a href="time-line.html" title=""><img
+                                  [src]="friendRequest.avatar" alt=""></a>
+                              </figure>
+                              <div class="pepl-info">
+                                <h4>
+                                  <a href="time-line.html"
+                                     title="">{{friendRequest.fullName}}</a>
+                                </h4>
+                                <span *ngIf="friendRequest.mutualFriends != 0">
+                                                                    {{friendRequest.mutualFriends}} bạn chung</span>
+                                <a (click)="deleteFriendRequest(accountId, friendRequest.userID)"
+                                   class="add-butn more-action"
+                                   [id]="friendRequest.userID + '_1'"
+                                   style="width: 70px; text-align: center; cursor: pointer;">{{deleteRequest}}</a>
+                                <a (click)="confirmFriend(accountId, friendRequest.userID)"
+                                   class="add-butn" [id]="friendRequest.userID + '_2'"
+                                   style="width: 70px; text-align: center; cursor: pointer;">{{confirm}}</a>
+                                <!-- Sau khi click để chuyển trạng thái -->
+                                <a class="add-butn more-action"
+                                   [id]="friendRequest.userID + '_3'"
+                                   style="width: 90px; text-align: center;" hidden>Đã
+                                  từ chối</a>
+                                <a class="add-butn" [id]="friendRequest.userID + '_4'"
+                                   style="width: 90px; text-align: center;" hidden>✓
+                                  Bạn bè</a>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                        <button *ngIf="loaded < listLength" class="btn-view btn-load-more"
+                                (click)="loadMore()"></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div><!-- centerl meta -->
+              <div class="col-lg-3">
+                <aside class="sidebar static">
+                </aside>
+              </div><!-- sidebar -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

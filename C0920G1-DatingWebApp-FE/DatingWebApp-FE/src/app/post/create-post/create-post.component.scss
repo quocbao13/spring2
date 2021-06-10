@@ -1,0 +1,22 @@
+#abc:focus{
+  outline: none !important;
+}
+#abc::-webkit-input-placeholder{
+  font-size: 25px;
+}
+.image-display:hover{
+  filter: brightness(0.5);
+}
+.close-x{
+  height: 30px;
+  width: 30px;
+  border-radius: 25px;
+  position: absolute;
+  right: 0;
+  top: -50px;
+  z-index: 999;
+  cursor: pointer;
+  background-color: #FFFFFF;
+  display: block;
+  text-align: center;
+}

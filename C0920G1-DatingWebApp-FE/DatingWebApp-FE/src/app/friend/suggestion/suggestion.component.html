@@ -1,0 +1,18 @@
+<div class="widget friend-list stick-widget">
+  <h4 class="widget-title">Gợi ý kết bạn</h4>
+  <div id="searchDir1"></div>
+  <ul id="people-list1" class="friendz-list" *ngFor="let fri of suggestionToMakeFriendsDTO">
+    <li>
+      <figure>
+        <p><img src="{{fri.avatar}}" width="50px" height="50px"></p>
+      </figure>
+      <div class="friendz-meta">
+        <h6 style="font-size: 10px"><a [routerLink]="['/profile/' + fri.userID]">{{fri.fullName}}</a></h6>
+        <span style="font-size: 10px">Được gợi ý từ bạn của bạn.</span>
+      </div>
+      <button _ngcontent-ujf-c20 title style="font-size: 10px ;margin-left: 5px; color: white" type="submit"
+              class="add-butn" data-ripple="">Gửi lời mời
+      </button>
+    </li>
+  </ul>
+</div>

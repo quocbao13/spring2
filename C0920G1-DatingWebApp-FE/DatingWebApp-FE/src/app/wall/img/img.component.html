@@ -1,0 +1,199 @@
+<section>
+  <div class="feature-photo">
+    <figure >
+      <img src="{{img[0].userBackground}}" width="100%" height="30%" alt="">
+    </figure>
+    <form class="edit-phto">
+      <i class="fa fa-camera-retro"></i>
+      <label class="fileContainer">
+        chỉnh sửa ảnh bìa
+        <input type="file"/>
+      </label>
+    </form>
+    <div class="container-fluid">
+      <div class="row merged">
+        <div class="col-lg-2 col-sm-3">
+          <div class="user-avatar">
+            <figure>
+              <img src="{{img[0].userAvatar}}" alt="">
+              <form class="edit-phto">
+                <i class="fa fa-camera-retro"></i>
+                <label class="fileContainer">
+                  chỉnh sửa ảnh đại diện
+                  <input type="file"/>
+                </label>
+              </form>
+            </figure>
+          </div>
+        </div>
+        <div class="col-lg-10 col-sm-9">
+          <div class="timeline-info">
+            <ul>
+              <li class="admin-name">
+                <h5><a class="bold">
+                  {{img[0].userFullname}}
+                </a>
+                </h5>
+                <span>Group Admin</span>
+              </li>
+              <li>
+                <a class="active" title="" [routerLink]="['/profile']"  data-ripple="">Dòng thời gian</a>
+                <a class="" [routerLink]="['/profile/img/'+id]" title="" data-ripple="">Photos</a>
+
+                <a class="" [routerLink]="['/profile/friend']" title="" data-ripple="">Bạn bè</a>
+                <a class="" [routerLink]="['/profile/group']" title="" data-ripple="">Nhóm</a>
+                <a class="" href="about.html" title="" data-ripple="">Giới Thiệu</a>
+
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--  </div>-->
+  </div>
+
+</section><!-- top area -->
+<div class="central-meta item">
+  <section>
+    <div class="gap gray-bg">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="row" id="page-contents">
+              <div class="col-lg-3">
+                <aside class="sidebar static">
+                  <div class="widget stick-widget">
+                    <h4 class="widget-title">Shortcuts</h4>
+                    <ul class="naves">
+                      <li>
+                        <i class="ti-mouse-alt"></i>
+                        <a title="" [routerLink]="['/dating']">Hẹn hò</a>
+                      </li>
+                      <li>
+                        <i class="ti-files"></i>
+                        <a title="" [routerLink]="['/profile']">Trang của tôi</a>
+                      </li>
+                      <li>
+                        <i class="ti-user"></i>
+                        <a title="" [routerLink]="['/profile/friend']">Bạn bè</a>
+                      </li>
+                      <li>
+                        <i class="ti-image"></i>
+                        <a title="" [routerLink]="['/profile/img/'+id]">Hình ảnh</a>
+                      </li>
+                    </ul>
+                  </div>
+                </aside>
+              </div><!-- sidebar -->
+
+
+                    <!--//Khanh-->
+
+                  <div class="col-lg-6">
+                    <div class="central-meta" >
+                      <ul class="photos">
+
+                        <li *ngFor="let img1 of img">
+                          <a class="strip" href="{{img1.urlImg}}" title="" data-strip-group="mygroup" data-strip-group-options="loop: false">
+                            <img src="{{img1.urlImg}}" alt=""></a>
+                        </li>
+
+                      </ul>
+                      <div class="lodmore"><button class="btn-view btn-load-more"></button></div>
+                    </div><!-- photos -->
+                  </div><!-- centerl meta -->
+
+              </div>
+<!--              <div class="col-lg-3">-->
+<!--                <aside class="sidebar static">-->
+<!--                  <div class="widget friend-list stick-widget">-->
+<!--                    <h4 class="widget-title">Gợi ý kết bạn</h4>-->
+<!--                    <div id="searchDir1"></div>-->
+<!--                    <ul id="people-list1" class="friendz-list" *ngFor="let fri of suggestionToMakeFriendsDTO">-->
+<!--                      <li>-->
+<!--                        <figure>-->
+<!--                          <p><img src="{{fri.avatar}}" width="50px" height="50px"></p>-->
+<!--                        </figure>-->
+<!--                        <div class="friendz-meta">-->
+<!--                          <h6 style="font-size: 10px"><a [routerLink]="['/profile/' + fri.userID]">{{fri.fullName}}</a></h6>-->
+<!--                          <span style="font-size: 10px">Được gợi ý từ bạn của bạn.</span>-->
+<!--                        </div>-->
+<!--                        <button  _ngcontent-ujf-c20 title style="font-size: 10px ;margin-left: 5px; color: white"  type="submit" class="add-butn" data-ripple="">Gửi lời mời</button>-->
+<!--                      </li>-->
+<!--                    </ul>-->
+<!--                    &lt;!&ndash;                    <div class="chat-box">&ndash;&gt;-->
+<!--                    &lt;!&ndash;                      <div class="chat-head">&ndash;&gt;-->
+<!--                    &lt;!&ndash;                        <span class="status f-online"></span>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                        <h6>Bucky Barnes</h6>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                        <div class="more">&ndash;&gt;-->
+<!--                    &lt;!&ndash;                          <span><i class="ti-more-alt"></i></span>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                          <span class="close-mesage"><i class="ti-close"></i></span>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                        </div>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                      </div>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                      <div class="chat-list">&ndash;&gt;-->
+<!--                    &lt;!&ndash;                        <ul>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                          <li class="me">&ndash;&gt;-->
+<!--                    &lt;!&ndash;                            <div class="chat-thumb"><img src="images/resources/chatlist1.jpg" alt=""></div>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                            <div class="notification-event">&ndash;&gt;-->
+<!--                    &lt;!&ndash;   <span class="chat-message-item">&ndash;&gt;-->
+<!--                    &lt;!&ndash;    Hi James! Please remember to buy the food for tomorrow! I'm gonna be handling the gifts and Jake's gonna get the drinks&ndash;&gt;-->
+<!--                    &lt;!&ndash;   </span>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                              <span class="notification-date"><time datetime="2004-07-24T18:18"&ndash;&gt;-->
+<!--                    &lt;!&ndash;                                                                    class="entry-date updated">Yesterday at 8:10pm</time></span>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                          </li>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                          <li class="you">&ndash;&gt;-->
+<!--                    &lt;!&ndash;                            <div class="chat-thumb"><img src="images/resources/chatlist2.jpg" alt=""></div>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                            <div class="notification-event">&ndash;&gt;-->
+<!--                    &lt;!&ndash;   <span class="chat-message-item">&ndash;&gt;-->
+<!--                    &lt;!&ndash;    Hi James! Please remember to buy the food for tomorrow! I'm gonna be handling the gifts and Jake's gonna get the drinks&ndash;&gt;-->
+<!--                    &lt;!&ndash;   </span>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                              <span class="notification-date"><time datetime="2004-07-24T18:18"&ndash;&gt;-->
+<!--                    &lt;!&ndash;                                                                    class="entry-date updated">Yesterday at 8:10pm</time></span>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                          </li>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                          <li class="me">&ndash;&gt;-->
+<!--                    &lt;!&ndash;                            <div class="chat-thumb"><img src="images/resources/chatlist1.jpg" alt=""></div>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                            <div class="notification-event">&ndash;&gt;-->
+<!--                    &lt;!&ndash;   <span class="chat-message-item">&ndash;&gt;-->
+<!--                    &lt;!&ndash;    Hi James! Please remember to buy the food for tomorrow! I'm gonna be handling the gifts and Jake's gonna get the drinks&ndash;&gt;-->
+<!--                    &lt;!&ndash;   </span>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                              <span class="notification-date"><time datetime="2004-07-24T18:18"&ndash;&gt;-->
+<!--                    &lt;!&ndash;                                                                    class="entry-date updated">Yesterday at 8:10pm</time></span>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                          </li>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                        </ul>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                        <form class="text-box">&ndash;&gt;-->
+<!--                    &lt;!&ndash;                          <textarea placeholder="Post enter to post..."></textarea>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                          <div class="add-smiles">&ndash;&gt;-->
+<!--                    &lt;!&ndash;                            <span title="add icon" class="em em-expressionless"></span>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                          </div>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                          <div class="smiles-bunch">&ndash;&gt;-->
+<!--                    &lt;!&ndash;                            <i class="em em-&#45;&#45;1"></i>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                            <i class="em em-smiley"></i>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                            <i class="em em-anguished"></i>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                            <i class="em em-laughing"></i>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                            <i class="em em-angry"></i>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                            <i class="em em-astonished"></i>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                            <i class="em em-blush"></i>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                            <i class="em em-disappointed"></i>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                            <i class="em em-worried"></i>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                            <i class="em em-kissing_heart"></i>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                            <i class="em em-rage"></i>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                            <i class="em em-stuck_out_tongue"></i>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                          </div>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                          <button type="submit"></button>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                        </form>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                      </div>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--                  </div>-->
+<!--                </aside>-->
+
+<!--              </div>-->
+            </div>
+          </div>
+        </div>
+      </div>
+  </section>
+    </div>

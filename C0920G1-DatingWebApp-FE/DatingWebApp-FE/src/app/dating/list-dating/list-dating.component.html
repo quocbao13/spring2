@@ -1,0 +1,127 @@
+<ng-template #customLoadingTemplate>
+</ng-template>
+
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>
+<div class="theme-layout">
+
+  <section>
+    <div class="gap gray-bg">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="row" id="page-contents">
+              <div class="col-lg-3">
+                <aside class="sidebar static">
+                  <div class="widget stick-widget">
+                    <div style="cursor: pointer; margin-left: 16px; margin-top: 20px; margin-bottom: 20px">
+                      <a title="" [routerLink]="['/profile/list-post/' + idUser]">
+                        <img src="{{avatarUser}}" alt="" style="vertical-align: middle;width: 50px;height: 50px; border-radius: 50%">
+                        <span> <b> {{userName}}</b></span>
+                      </a>
+                    </div>
+                    <ul >
+                      <li>
+                        <span style="font-size: 20px">💑 </span>
+                        <a title="" [routerLink]="['/dating']">Hẹn hò</a>
+                      </li>
+                      <li>
+                        <span style="font-size: 20px">📃 </span>
+                        <a title="" [routerLink]="['/profile/list-post/' + idUser]">Trang của tôi</a>
+                      </li>
+                      <li>
+                        <span style="font-size: 20px">🤝 </span>
+                        <a title="" [routerLink]="['/profile/friend']">Bạn bè</a>
+                      </li>
+                      <li>
+                        <span style="font-size: 20px">📸 </span>
+                        <a title="" href="images.html">Hình ảnh</a>
+                      </li>
+                    </ul>
+                  </div>
+                </aside>
+              </div><!-- sidebar -->
+              <div class="col-lg-6">
+                <div class="central-meta">
+                  <div class="editing-interest">
+                    <div>
+                      <h3>Gợi ý Hẹn hò từ hệ thống</h3>
+                      <p>Hãy tìm kiếm người phù hợp với bạn</p>
+                      <div class="row">
+                        <div class="col-lg-12" style="z-index: 1">
+                          <aside class="sidebar static" style="width: 100%; z-index: 1000; background: white">
+                            <div class="widget stick-widget" >
+                              <div style="width: 100%;">
+                                <h4 class="widget-title">Sở thích của bạn</h4>
+                                <p class="add-butn"
+                                   style="position: static; display: block; float: left; padding: 0 8px; margin: 5px 2.5px;
+                                  color: white;" [style.background]="hobby.color" *ngFor="let hobby of hobbyRecommend">
+                                  {{hobby.name}}
+                                </p>
+                                <p *ngIf="hobbyRecommend.length == 0" style="padding-left: 20px">
+                                  Bạn nên thêm sở thích tại <a [routerLink]="['/edit-info']">sửa thông tin cá nhân</a> để có những gợi ý hẹn hò cho bạn
+                                </p>
+                              </div>
+
+                            </div>
+                          </aside>
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="central-meta item" *ngFor="let user of userRecommend">
+                      <div class="user-post">
+                        <div class="friend-info">
+                          <figure>
+                            <img src="{{user.img}}" alt="">
+                          </figure>
+                          <div class="friend-name">
+                            <ins><a [routerLink]="['/profile/list-post/' + user.userId]" title="">{{user.name}}</a></ins>
+                            <span>{{user.gender}} | {{user.birthDay}} Tuổi | {{user.province}}</span>
+                          </div>
+                          <div class="description">
+                            <p>
+                              {{user.description}}
+                            </p>
+                          </div>
+                          <div class="post-meta">
+                            <div class="linked-image align-left">
+                              <a href="#" title=""><img src="{{user.img}}"
+                                                        alt="" style="width: 200px; height: 200px"></a>
+                            </div>
+                            <div class="detail">
+                              <span style="float: left; width: 100%; margin-bottom: 15px">Sở thích</span>
+                              <p class="add-butn"
+                                 style="position: static; display: block; float: left; padding: 0 8px; margin-right: 5px;
+                                  color: white;" [style.background]="hobby.color" *ngFor="let hobby of user.hobbies">
+                                {{hobby.name}}
+                              </p>
+                              <div>
+                                <a class="add-butn btn-click-check-create"
+                                   style="left: 208px; width: 83px; color: white;" role="button"
+                                   title="" data-ripple="" (click)="addFriend(user.userId)">Thêm Bạn</a>
+                                <a class="add-butn more-action btn-click-check-dislike"
+                                   style="left: 295px; width: 90px; color: white;"
+                                   title="" data-ripple="" role="button" (click)="saveDislike(user.userId)">Không Hợp</a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div><!-- centerl meta -->
+              <div class="col-lg-3">
+                <aside class="sidebar static">
+                </aside>
+              </div><!-- sidebar -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+</div>
+

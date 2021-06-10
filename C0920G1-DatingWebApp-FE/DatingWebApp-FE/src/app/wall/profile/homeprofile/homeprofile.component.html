@@ -1,0 +1,363 @@
+<section>
+  <div class="feature-photo">
+    <figure >
+      <img src="{{bg}}" style="width : 100%; height : 100%" alt="">
+    </figure>
+    <div class="add-btn" *ngIf="check1">
+      <!-- Hiển thị phía người gửi lời mời -->
+      <a (click)="addFriend()" style="cursor: pointer;" id="status">{{button}}</a>
+      <!-- Hiển thị phía người nhận lời mời -->
+      <a (click)="deleteFriendRequest(idAccount, idS)" class="add-butn more-action" [id]="idS + '_1'"
+         style="width: 70px; text-align: center; cursor: pointer;"
+         *ngIf="statusId == 4">{{deleteRequest}}</a>
+      <a (click)="confirmFriend(idAccount, idS)" class="add-butn" [id]="idS + '_2'"
+         style="width: 70px; text-align: center; cursor: pointer;" *ngIf="statusId == 4">{{confirm}}</a>
+      <!-- Sau khi click để chuyển trạng thái -->
+      <a class="add-butn more-action" [id]="idS + '_3'" style="width: 90px; text-align: center;" hidden>Đã
+        từ chối</a>
+      <a class="add-butn" [id]="idS + '_4'" style="width: 90px; text-align: center;" hidden>✓
+        Bạn bè</a>
+    </div>
+    <form class="edit-phto" *ngIf=" idAccount == idS">
+      <i class="fa fa-camera-retro"></i>
+      <label class="fileContainer">
+        chỉnh sửa ảnh bìa
+        <input type="file"/>
+      </label>
+    </form>
+    <div class="container-fluid">
+      <div class="row merged">
+        <div class="col-lg-2 col-sm-3">
+          <div class="user-avatar">
+            <figure>
+              <img src="{{avatar}}" alt="">
+              <form class="edit-phto" *ngIf=" idAccount == idS">
+                <i class="fa fa-camera-retro"></i>
+                <label class="fileContainer">
+                  chỉnh sửa ảnh đại diện
+                  <input type="file"/>
+                </label>
+              </form>
+            </figure>
+          </div>
+        </div>
+        <div class="col-lg-10 col-sm-9">
+          <div class="timeline-info">
+            <ul>
+              <li class="admin-name">
+                <h5><a class="bold">
+                  {{fullName}}
+                </a>
+                </h5>
+                <span></span>
+              </li>
+              <li>
+                <a class="active" title="" [routerLink]="['/profile']"  data-ripple="">Dòng thời gian</a>
+                <a class="" [routerLink]="['/profile/img/'+ id]" title="" data-ripple="">Photos</a>
+
+                <a class="" [routerLink]="['/profile/friend']" title="" data-ripple="">Bạn bè</a>
+                <a class="" [routerLink]="['/profile/group']" title="" data-ripple="">Nhóm</a>
+                <a class="" href="about.html" title="" data-ripple="">Giới Thiệu</a>
+
+
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--  </div>-->
+  </div>
+
+</section><!-- top area -->
+<div class="central-meta item">
+  <section>
+    <div class="gap gray-bg">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="row" id="page-contents">
+              <div class="col-lg-3">
+                <aside class="sidebar static">
+                  <div class="widget stick-widget">
+                    <div style="cursor: pointer; margin-left: 16px; margin-top: 20px; margin-bottom: 20px">
+                      <a title="" [routerLink]="['/profile/list-post/' + idUser]">
+                        <img src="{{avatarUser}}" alt="" style="vertical-align: middle;width: 50px;height: 50px; border-radius: 50%">
+                        <span> <b> {{userName}}</b></span>
+                      </a>
+                    </div>
+                    <ul >
+                      <li>
+                        <span style="font-size: 20px">💑 </span>
+                        <a title="" [routerLink]="['/dating']">Hẹn hò</a>
+                      </li>
+                      <li>
+                        <span style="font-size: 20px">📃 </span>
+                        <a title="" [routerLink]="['/profile/list-post/' + idUser]">Trang của tôi</a>
+                      </li>
+                      <li>
+                        <span style="font-size: 20px">🤝 </span>
+                        <a title="" [routerLink]="['/profile/friend']">Bạn bè</a>
+                      </li>
+                      <li>
+                        <span style="font-size: 20px">📸 </span>
+                        <a title="" href="images.html">Hình ảnh</a>
+                      </li>
+                    </ul>
+                  </div>
+                </aside>
+              </div><!-- sidebar -->
+
+              <div class="col-lg-6">
+                <div class="loadMore"  >
+                  <div class="central-meta item" >
+                    <!--//Khanh-->
+                    <div class="create-post">
+                      <div class="box-post">
+                        <figure>
+                          <img src="{{avatarUser}}">
+                          <div class="content-post" (click)="openDialog()">
+                            <span style="float: left">Viết gì đó</span>
+                          </div>
+                        </figure>
+                      </div>
+                    </div>
+                    <!--\\Khanh-->
+                  </div>
+                  <div class="central-meta item"
+                       *ngFor="let profileDTO of iInfoAccount">
+
+                      <div class="user-post" >
+                        <div class="friend-info">
+                          <figure>
+                            <img src="{{profileDTO.userAvatar}}" alt="">
+                          </figure>
+                          <div class="friend-name">
+
+                            <div class="float-right" style="display: flex">
+
+                              <div class="mr-2" (click)="openDialogEditPost(profileDTO.postID)" style="cursor: pointer"><i class="fa fa-edit"></i></div>
+                              <div ><a href="#" title="Xóa" style="color: #dc3545"><i class="fa fa-trash"></i></a></div>
+
+                            </div>
+
+
+                            <ins><a [routerLink]="['/profile/list-post/'+ profileDTO.idUserPost]">{{profileDTO.fullnameUser}}</a></ins>
+                            <span>{{formatDate(profileDTO.postDate)}}</span>
+                          </div>
+                          <div class="post-meta">
+                            <img src="{{profileDTO.postImg}}" alt="">
+                            <div class="we-video-info">
+                              <ul>
+                                <li>
+																<span class="views" data-toggle="tooltip" title="views">
+																	<i class="fa fa-eye"></i>
+																	<ins>1.2k</ins>
+																</span>
+                                </li>
+
+                                <li>
+																<span class="like" data-toggle="tooltip" title="like">
+																	<i class="ti-heart"></i>
+																	<ins>{{profileDTO.count}}</ins>
+																</span>
+                                </li>
+                              </ul>
+                            </div>
+                            <div class="description">
+                              <p>
+                                {{profileDTO.postContent}}
+                              </p>
+                            </div>
+<!--                            <ng-template *ngIf="profileDTO.postImg!=null">-->
+<!--                              <div  *ngFor="let img1 of profileDTO.postImg.split(' ')">-->
+<!--                                <img  src="{{img1}}" *ngIf="profileDTO.postImg.split(' ').length == 1 && img1 != ''"-->
+<!--                                      (click)="showListImg(profileDTO.postImg.split(' '))">-->
+<!--                                <img  src="{{img1}}" style="width: 50%; float: left; height: 300px"-->
+<!--                                      *ngIf="profileDTO .postImg.split(' ').length > 1 && img1 != ''"-->
+<!--                                      (click)="showListImg(profileDTO .postImg.split(' '))">-->
+<!--                              </div>-->
+<!--                            </ng-template>-->
+
+                          </div>
+                        </div>
+                        <div class="coment-area" >
+                          <ul class="we-comet">
+                            <ng-template
+                              *ngFor="let comment of iProfileDTO "
+                              [ngIf]=" profileDTO.postContent!=null && comment.commentIDpost == profileDTO.postID && comment.commentIDparent== null "
+                            >
+                              <li >
+
+                                <div class="comet-avatar">
+                                  <img src="{{comment.userAvatarComment}}" alt="">
+                                </div>
+                                <div class="we-comment">
+                                  <div class="coment-head">
+                                    <h5><a [routerLink]="['/profile/list-post/'+comment.idUserComment]">{{comment.fullnameUserComment}}</a></h5>
+                                    <span>{{formatDate(comment.commentDate)}}</span>
+                                    <a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>
+                                  </div>
+                                  <p>{{comment.commentContent}}</p>
+                                </div>
+
+                                <ul >
+                                  <ng-template  *ngFor=" let comment2 of iProfileDTO " [ngIf]="comment2.commentIDparent!=null && comment2.commentIDparent == comment.commentID && profileDTO.postContent!=null "
+                                  >
+                                    <li>
+                                      <div class="comet-avatar">
+                                        <img src="{{comment2.userAvatarComment}}" alt="">
+                                      </div>
+                                      <div class="we-comment">
+                                        <div class="coment-head">
+                                          <h5><a>{{comment2.fullnameUserComment}}</a></h5>
+                                          <span>{{comment2.commentDate}}</span>
+                                          <a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>
+                                        </div>
+                                        <p>{{comment2.commentContent}}</p>
+                                      </div>
+                                    </li>
+                                  </ng-template>
+                                </ul>
+
+
+                              </li>
+                            </ng-template>
+                            <li>
+                              <a href="#" title="" class="showmore underline">more comments</a>
+                            </li>
+                            <li class="post-comment">
+                              <div class="comet-avatar">
+                                <img src="{{iInfoAccount[0].userAvatar}}" alt="">
+                              </div>
+                              <div class="post-comt-box">
+                                <form method="post">
+                                  <textarea placeholder="Post your comment"></textarea>
+                                  <div class="add-smiles">
+                                    <span class="em em-expressionless" title="add icon"></span>
+                                  </div>
+                                  <div class="smiles-bunch">
+                                    <i class="em em---1"></i>
+                                    <i class="em em-smiley"></i>
+                                    <i class="em em-anguished"></i>
+                                    <i class="em em-laughing"></i>
+                                    <i class="em em-angry"></i>
+                                    <i class="em em-astonished"></i>
+                                    <i class="em em-blush"></i>
+                                    <i class="em em-disappointed"></i>
+                                    <i class="em em-worried"></i>
+                                    <i class="em em-kissing_heart"></i>
+                                    <i class="em em-rage"></i>
+                                    <i class="em em-stuck_out_tongue"></i>
+                                  </div>
+                                  <button type="submit"></button>
+                                </form>
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+
+
+                  </div>
+                </div>
+
+              <div class="lodmore">
+                <button class="btn-view btn-load-more" (click)="incrementPage()"></button>
+              </div>
+
+              </div>
+              <div class="col-lg-3">
+                <aside class="sidebar static">
+                  <div class="widget friend-list stick-widget">
+                    <h4 class="widget-title">Gợi ý kết bạn</h4>
+                    <div id="searchDir1"></div>
+                    <ul id="people-list1" class="friendz-list" *ngFor="let fri of suggestionToMakeFriendsDTO">
+                      <li>
+                        <figure>
+                          <p><img src="{{fri.avatar}}" width="50px" height="50px"></p>
+                        </figure>
+                        <div class="friendz-meta">
+                          <h6 style="font-size: 10px"><a [routerLink]="['/profile/' + fri.userID]">{{fri.fullName}}</a></h6>
+                          <span style="font-size: 10px">Được gợi ý từ bạn của bạn.</span>
+                        </div>
+                        <button  _ngcontent-ujf-c20 title style="font-size: 10px ;margin-left: 5px; color: white"  type="submit" class="add-butn" data-ripple="">Gửi lời mời</button>
+                      </li>
+                    </ul>
+<!--                    <div class="chat-box">-->
+<!--                      <div class="chat-head">-->
+<!--                        <span class="status f-online"></span>-->
+<!--                        <h6>Bucky Barnes</h6>-->
+<!--                        <div class="more">-->
+<!--                          <span><i class="ti-more-alt"></i></span>-->
+<!--                          <span class="close-mesage"><i class="ti-close"></i></span>-->
+<!--                        </div>-->
+<!--                      </div>-->
+<!--                      <div class="chat-list">-->
+<!--                        <ul>-->
+<!--                          <li class="me">-->
+<!--                            <div class="chat-thumb"><img src="images/resources/chatlist1.jpg" alt=""></div>-->
+<!--                            <div class="notification-event">-->
+<!--   <span class="chat-message-item">-->
+<!--    Hi James! Please remember to buy the food for tomorrow! I'm gonna be handling the gifts and Jake's gonna get the drinks-->
+<!--   </span>-->
+<!--                              <span class="notification-date"><time datetime="2004-07-24T18:18"-->
+<!--                                                                    class="entry-date updated">Yesterday at 8:10pm</time></span>-->
+<!--                            </div>-->
+<!--                          </li>-->
+<!--                          <li class="you">-->
+<!--                            <div class="chat-thumb"><img src="images/resources/chatlist2.jpg" alt=""></div>-->
+<!--                            <div class="notification-event">-->
+<!--   <span class="chat-message-item">-->
+<!--    Hi James! Please remember to buy the food for tomorrow! I'm gonna be handling the gifts and Jake's gonna get the drinks-->
+<!--   </span>-->
+<!--                              <span class="notification-date"><time datetime="2004-07-24T18:18"-->
+<!--                                                                    class="entry-date updated">Yesterday at 8:10pm</time></span>-->
+<!--                            </div>-->
+<!--                          </li>-->
+<!--                          <li class="me">-->
+<!--                            <div class="chat-thumb"><img src="images/resources/chatlist1.jpg" alt=""></div>-->
+<!--                            <div class="notification-event">-->
+<!--   <span class="chat-message-item">-->
+<!--    Hi James! Please remember to buy the food for tomorrow! I'm gonna be handling the gifts and Jake's gonna get the drinks-->
+<!--   </span>-->
+<!--                              <span class="notification-date"><time datetime="2004-07-24T18:18"-->
+<!--                                                                    class="entry-date updated">Yesterday at 8:10pm</time></span>-->
+<!--                            </div>-->
+<!--                          </li>-->
+<!--                        </ul>-->
+<!--                        <form class="text-box">-->
+<!--                          <textarea placeholder="Post enter to post..."></textarea>-->
+<!--                          <div class="add-smiles">-->
+<!--                            <span title="add icon" class="em em-expressionless"></span>-->
+<!--                          </div>-->
+<!--                          <div class="smiles-bunch">-->
+<!--                            <i class="em em-&#45;&#45;1"></i>-->
+<!--                            <i class="em em-smiley"></i>-->
+<!--                            <i class="em em-anguished"></i>-->
+<!--                            <i class="em em-laughing"></i>-->
+<!--                            <i class="em em-angry"></i>-->
+<!--                            <i class="em em-astonished"></i>-->
+<!--                            <i class="em em-blush"></i>-->
+<!--                            <i class="em em-disappointed"></i>-->
+<!--                            <i class="em em-worried"></i>-->
+<!--                            <i class="em em-kissing_heart"></i>-->
+<!--                            <i class="em em-rage"></i>-->
+<!--                            <i class="em em-stuck_out_tongue"></i>-->
+<!--                          </div>-->
+<!--                          <button type="submit"></button>-->
+<!--                        </form>-->
+<!--                      </div>-->
+<!--                    </div>-->
+                  </div>
+                </aside>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+</div>

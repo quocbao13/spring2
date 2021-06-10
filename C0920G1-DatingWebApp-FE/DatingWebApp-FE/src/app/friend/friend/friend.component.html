@@ -1,0 +1,389 @@
+<div class="theme-layout"><!-- top area -->
+  <section>
+    <div class="gap gray-bg">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="row" id="page-contents">
+              <div class="col-lg-3">
+                <aside class="sidebar static">
+                  <div class="widget stick-widget">
+                    <div style="cursor: pointer; margin-left: 16px; margin-top: 20px; margin-bottom: 20px">
+                      <a title="" [routerLink]="['/profile/list-post/' + idUser]">
+                        <img src="{{avatarUser}}" alt="" style="vertical-align: middle;width: 50px;height: 50px; border-radius: 50%">
+                        <span> <b> {{userName}}</b></span>
+                      </a>
+                    </div>
+                    <ul >
+                      <li>
+                        <span style="font-size: 20px">💑 </span>
+                        <a title="" [routerLink]="['/dating']">Hẹn hò</a>
+                      </li>
+                      <li>
+                        <span style="font-size: 20px">📃 </span>
+                        <a title="" [routerLink]="['/profile/list-post/' + idUser]">Trang của tôi</a>
+                      </li>
+                      <li>
+                        <span style="font-size: 20px">🤝 </span>
+                        <a title="" [routerLink]="['/profile/friend']">Bạn bè</a>
+                      </li>
+                      <li>
+                        <span style="font-size: 20px">📸 </span>
+                        <a title="" href="images.html">Hình ảnh</a>
+                      </li>
+                    </ul>
+                  </div>
+                </aside>
+              </div><!-- sidebar -->
+              <div class="col-lg-6">
+                <div class="central-meta">
+                  <div class="frnds">
+                    <ul class="nav nav-tabs">
+                      <li class="nav-item"><a class="active" href="#frends" data-toggle="tab">Bạn bè</a>
+                      </li>
+                      <li class="nav-item"><a class="" href="#frends-req" data-toggle="tab">Yêu cầu kết bạn</a></li>
+
+                    </ul>
+                    <!--chỗ bạn bè ở đây-->
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                      <div class="tab-pane active fade show " id="frends" *ngFor="let fri of friendList">
+                        <ul class="nearby-contct">
+                          <li>
+                            <div class="nearly-pepls">
+                              <figure>
+                                <p><img src="{{fri.avatar}}" width="50px" height="50px"></p>
+                              </figure>
+                              <div class="pepl-info">
+                                <h4><a [routerLink]="['/profile/list-post/' + fri.userID]" title="">{{fri.fullName}}</a>
+                                </h4>
+                                <span>{{fri.mutualFriends}} Bạn chung</span>
+                                <a style="color: white" title="" class="add-butn more-action" type="submit"
+                                   (click)="delFriend(fri.userID)">Xóa bạn</a>
+                                <a style="color: white" title="" class="add-butn" type="submit"
+                                   (click)="blockFriend(fri.userID)">Chặn bạn</a>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="lodmore">
+                        <button class="btn-view btn-load-more" (click)="incrementPage()"></button>
+                      </div>
+                    </div>
+                    <!--Dương Nguyên Bảo-->
+                    <div class="tab-pane fade active show" id="frends-req">
+                      <div *ngIf="listLength == 0" style="text-align: center; color: gray;">
+                        Chưa có yêu cầu nào
+                      </div>
+                      <ul class="nearby-contct">
+                        <li *ngFor="let friendRequest of friendRequestList">
+                          <div class="nearly-pepls">
+                            <figure>
+                              <a href="time-line.html" title=""><img
+                                [src]="friendRequest.avatar" alt=""></a>
+                            </figure>
+                            <div class="pepl-info">
+                              <h4>
+                                <a href="time-line.html"
+                                   title="">{{friendRequest.fullName}}</a>
+                              </h4>
+                              <span *ngIf="friendRequest.mutualFriends != 0">
+                                                                    {{friendRequest.mutualFriends}} bạn chung</span>
+                              <a (click)="deleteFriendRequest(accountId, friendRequest.userID)"
+                                 class="add-butn more-action"
+                                 [id]="friendRequest.userID + '_1'"
+                                 style="width: 70px; text-align: center; cursor: pointer;">{{deleteRequest}}</a>
+                              <a (click)="confirmFriend(accountId, friendRequest.userID)"
+                                 class="add-butn" [id]="friendRequest.userID + '_2'"
+                                 style="width: 70px; text-align: center; cursor: pointer;">{{confirm}}</a>
+                              <!-- Sau khi click để chuyển trạng thái -->
+                              <a class="add-butn more-action"
+                                 [id]="friendRequest.userID + '_3'"
+                                 style="width: 90px; text-align: center;" hidden>Đã
+                                từ chối</a>
+                              <a class="add-butn" [id]="friendRequest.userID + '_4'"
+                                 style="width: 90px; text-align: center;" hidden>✓
+                                Bạn bè</a>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                      <button *ngIf="loaded < listLength" class="btn-view btn-load-more"
+                              (click)="loadMore()"></button>
+                    </div>
+                  </div>
+                </div>
+              </div><!-- centerl meta -->
+              <div class="col-lg-3">
+                <aside class="sidebar static">
+                  <div class="widget friend-list stick-widget">
+                    <h4 class="widget-title">Gợi ý kết bạn</h4>
+                    <div id="searchDir1"></div>
+                    <ul id="people-list1" class="friendz-list" *ngFor="let fri of suggestionToMakeFriendsDTO">
+                      <li>
+                        <figure>
+                          <p><img src="{{fri.avatar}}" width="50px" height="50px"></p>
+                        </figure>
+                        <div class="friendz-meta">
+                          <h6 style="font-size: 10px"><a
+                            [routerLink]="['/profile/list-post/' + fri.userID]">{{fri.fullName}}</a></h6>
+                          <span style="font-size: 10px">Được gợi ý từ bạn của bạn.</span>
+                        </div>
+                        <button _ngcontent-ujf-c20 title style="font-size: 10px ;margin-left: 5px; color: white"
+                                type="submit" class="add-butn" data-ripple="" (click)="addFriend(fri.userID)">Kết bạn +
+                        </button>
+                      </li>
+                    </ul>
+                    <div class="chat-box">
+                      <div class="chat-head">
+                        <span class="status f-online"></span>
+                        <h6>Bucky Barnes</h6>
+                        <div class="more">
+                          <span><i class="ti-more-alt"></i></span>
+                          <span class="close-mesage"><i class="ti-close"></i></span>
+                        </div>
+                      </div>
+                      <div class="chat-list">
+                        <ul>
+                          <li class="me">
+                            <div class="chat-thumb"><img src="images/resources/chatlist1.jpg" alt=""></div>
+                            <div class="notification-event">
+															<span class="chat-message-item">
+																Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks
+															</span>
+                              <span class="notification-date"><time datetime="2004-07-24T18:18"
+                                                                    class="entry-date updated">Yesterday at 8:10pm</time></span>
+                            </div>
+                          </li>
+                          <li class="you">
+                            <div class="chat-thumb"><img src="images/resources/chatlist2.jpg" alt=""></div>
+                            <div class="notification-event">
+															<span class="chat-message-item">
+																Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks
+															</span>
+                              <span class="notification-date"><time datetime="2004-07-24T18:18"
+                                                                    class="entry-date updated">Yesterday at 8:10pm</time></span>
+                            </div>
+                          </li>
+                          <li class="me">
+                            <div class="chat-thumb"><img src="images/resources/chatlist1.jpg" alt=""></div>
+                            <div class="notification-event">
+															<span class="chat-message-item">
+																Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks
+															</span>
+                              <span class="notification-date"><time datetime="2004-07-24T18:18"
+                                                                    class="entry-date updated">Yesterday at 8:10pm</time></span>
+                            </div>
+                          </li>
+                        </ul>
+                        <form class="text-box">
+                          <textarea placeholder="Post enter to post..."></textarea>
+                          <div class="add-smiles">
+                            <span title="add icon" class="em em-expressionless"></span>
+                          </div>
+                          <div class="smiles-bunch">
+                            <i class="em em---1"></i>
+                            <i class="em em-smiley"></i>
+                            <i class="em em-anguished"></i>
+                            <i class="em em-laughing"></i>
+                            <i class="em em-angry"></i>
+                            <i class="em em-astonished"></i>
+                            <i class="em em-blush"></i>
+                            <i class="em em-disappointed"></i>
+                            <i class="em em-worried"></i>
+                            <i class="em em-kissing_heart"></i>
+                            <i class="em em-rage"></i>
+                            <i class="em em-stuck_out_tongue"></i>
+                          </div>
+                          <button type="submit"></button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </aside>
+                <aside class="sidebar static">
+                  <div class="widget friend-list stick-widget">
+                    <h4 class="widget-title">Bạn Bè</h4>
+                    <div id="searchDir2"></div>
+                    <ul id="people-list2" class="friendz-list">
+                      <li>
+                        <figure>
+                          <img src="images/resources/friend-avatar.jpg" alt="">
+                          <span class="status f-online"></span>
+                        </figure>
+                        <div class="friendz-meta">
+                          <a href="time-line.html">bucky barnes</a>
+                          <i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__"
+                                data-cfemail="4136282f352433322e2d25243301262c20282d6f222e2c">[email&#160;protected]</a></i>
+                        </div>
+                      </li>
+                      <li>
+                        <figure>
+                          <img src="images/resources/friend-avatar2.jpg" alt="">
+                          <span class="status f-away"></span>
+                        </figure>
+                        <div class="friendz-meta">
+                          <a href="time-line.html">Sarah Loren</a>
+                          <i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__"
+                                data-cfemail="3a585b48545f497a5d575b535614595557">[email&#160;protected]</a></i>
+                        </div>
+                      </li>
+                      <li>
+                        <figure>
+                          <img src="images/resources/friend-avatar3.jpg" alt="">
+                          <span class="status f-off"></span>
+                        </figure>
+                        <div class="friendz-meta">
+                          <a href="time-line.html">jason borne</a>
+                          <i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__"
+                                data-cfemail="127873617d7c7052757f737b7e3c717d7f">[email&#160;protected]</a></i>
+                        </div>
+                      </li>
+                      <li>
+                        <figure>
+                          <img src="images/resources/friend-avatar4.jpg" alt="">
+                          <span class="status f-off"></span>
+                        </figure>
+                        <div class="friendz-meta">
+                          <a href="time-line.html">Cameron diaz</a>
+                          <i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__"
+                                data-cfemail="620803110d0c0022050f030b0e4c010d0f">[email&#160;protected]</a></i>
+                        </div>
+                      </li>
+                      <li>
+
+                        <figure>
+                          <img src="images/resources/friend-avatar5.jpg" alt="">
+                          <span class="status f-online"></span>
+                        </figure>
+                        <div class="friendz-meta">
+                          <a href="time-line.html">daniel warber</a>
+                          <i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__"
+                                data-cfemail="0963687a66676b496e64686065276a6664">[email&#160;protected]</a></i>
+                        </div>
+                      </li>
+                      <li>
+
+                        <figure>
+                          <img src="images/resources/friend-avatar6.jpg" alt="">
+                          <span class="status f-away"></span>
+                        </figure>
+                        <div class="friendz-meta">
+                          <a href="time-line.html">andrew</a>
+                          <i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__"
+                                data-cfemail="5b313a283435391b3c363a323775383436">[email&#160;protected]</a></i>
+                        </div>
+                      </li>
+                      <li>
+
+                        <figure>
+                          <img src="images/resources/friend-avatar7.jpg" alt="">
+                          <span class="status f-off"></span>
+                        </figure>
+                        <div class="friendz-meta">
+                          <a href="time-line.html">amy watson</a>
+                          <i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__"
+                                data-cfemail="472d263428292507202a262e2b6924282a">[email&#160;protected]</a></i>
+                        </div>
+                      </li>
+                      <li>
+
+                        <figure>
+                          <img src="images/resources/friend-avatar5.jpg" alt="">
+                          <span class="status f-online"></span>
+                        </figure>
+                        <div class="friendz-meta">
+                          <a href="time-line.html">daniel warber</a>
+                          <i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__"
+                                data-cfemail="7a101b091514183a1d171b131654191517">[email&#160;protected]</a></i>
+                        </div>
+                      </li>
+                      <li>
+
+                        <figure>
+                          <img src="images/resources/friend-avatar2.jpg" alt="">
+                          <span class="status f-away"></span>
+                        </figure>
+                        <div class="friendz-meta">
+                          <a href="time-line.html">Sarah Loren</a>
+                          <i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__"
+                                data-cfemail="7c1e1d0e12190f3c1b111d1510521f1311">[email&#160;protected]</a></i>
+                        </div>
+                      </li>
+                    </ul>
+                    <div class="chat-box">
+                      <div class="chat-head">
+                        <span class="status f-online"></span>
+                        <h6>Bucky Barnes</h6>
+                        <div class="more">
+                          <span><i class="ti-more-alt"></i></span>
+                          <span class="close-mesage"><i class="ti-close"></i></span>
+                        </div>
+                      </div>
+                      <div class="chat-list">
+                        <ul>
+                          <li class="me">
+                            <div class="chat-thumb"><img src="images/resources/chatlist1.jpg" alt=""></div>
+                            <div class="notification-event">
+															<span class="chat-message-item">
+																Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks
+															</span>
+                              <span class="notification-date"><time datetime="2004-07-24T18:18"
+                                                                    class="entry-date updated">Yesterday at 8:10pm</time></span>
+                            </div>
+                          </li>
+                          <li class="you">
+                            <div class="chat-thumb"><img src="images/resources/chatlist2.jpg" alt=""></div>
+                            <div class="notification-event">
+															<span class="chat-message-item">
+																Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks
+															</span>
+                              <span class="notification-date"><time datetime="2004-07-24T18:18"
+                                                                    class="entry-date updated">Yesterday at 8:10pm</time></span>
+                            </div>
+                          </li>
+                          <li class="me">
+                            <div class="chat-thumb"><img src="images/resources/chatlist1.jpg" alt=""></div>
+                            <div class="notification-event">
+															<span class="chat-message-item">
+																Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks
+															</span>
+                              <span class="notification-date"><time datetime="2004-07-24T18:18"
+                                                                    class="entry-date updated">Yesterday at 8:10pm</time></span>
+                            </div>
+                          </li>
+                        </ul>
+                        <form class="text-box">
+                          <textarea placeholder="Post enter to post..."></textarea>
+                          <div class="add-smiles">
+                            <span title="add icon" class="em em-expressionless"></span>
+                          </div>
+                          <div class="smiles-bunch">
+                            <i class="em em---1"></i>
+                            <i class="em em-smiley"></i>
+                            <i class="em em-anguished"></i>
+                            <i class="em em-laughing"></i>
+                            <i class="em em-angry"></i>
+                            <i class="em em-astonished"></i>
+                            <i class="em em-blush"></i>
+                            <i class="em em-disappointed"></i>
+                            <i class="em em-worried"></i>
+                            <i class="em em-kissing_heart"></i>
+                            <i class="em em-rage"></i>
+                            <i class="em em-stuck_out_tongue"></i>
+                          </div>
+                          <button type="submit"></button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </aside>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

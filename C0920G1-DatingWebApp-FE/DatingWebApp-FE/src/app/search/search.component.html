@@ -1,0 +1,247 @@
+<div class="row">
+  <div class="col-lg-3">
+    <aside class="sidebar static">
+      <div class="widget stick-widget">
+        <h4 class="widget-title">Shortcuts</h4>
+        <ul class="naves">
+          <li>
+            <i class="ti-mouse-alt"></i>
+            <a title="" [routerLink]="['/dating']">Hẹn hò</a>
+          </li>
+          <li>
+            <i class="ti-files"></i>
+            <a title="" [routerLink]="['/profile/list-post/' + idS]">Trang của tôi</a>
+          </li>
+          <li>
+            <i class="ti-user"></i>
+            <a title="" [routerLink]="['/profile/friend']">Bạn bè</a>
+          </li>
+          <li>
+            <i class="ti-image"></i>
+            <a title="" href="images.html">Hình ảnh</a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+  <div class="col-lg-6">
+    <div class="central-meta">
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="tab" href="#home">Tất cả</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#menu1" (click)="showUpForm()">Mọi người</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#menu2">Nhóm</a>
+        </li>
+      </ul>
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div id="home" class="container tab-pane active"><br>
+          <div class="frnds">
+            <!-- Tab panes -->
+            <div class="tab-content">
+              <div class="tab-pane active fade show " id="frends">
+                <h2 class="text-center" *ngIf="listGroupUser == null"> Không có dữ liệu</h2>
+                <ul class="nearby-contct" *ngFor="let user of listGroupUser">
+                  <li>
+                    <div class="nearly-pepls">
+                      <figure *ngIf="user.status == 0">
+                        <a [routerLink]="['/profile/list-post/' + user.id] " title=""><img src="{{user.imgAvatar}}" width="50px"
+                                                                         height="50px" alt=""></a>
+                      </figure>
+                      <figure *ngIf="user.status == 1">
+                        <a [routerLink]="['/group/' + user.id]" title=""><img src="{{user.imgAvatar}}" width="50px"
+                                                                              height="50px" alt=""></a>
+
+                      </figure>
+                      <div class="pepl-info" *ngIf="user.status == 0">
+                        <h4><a [routerLink]="['/profile/list-post/' + user.id] " title="">{{user.name}}</a></h4>
+                        <span>{{user.age}} Tuổi</span>
+                        <a [routerLink]="['/profile/list-post/' + user.id] " title="" class="add-butn" data-ripple="">Người dùng</a>
+                      </div>
+                      <div class="pepl-info" *ngIf="user.status == 1" style="padding-top: 10px">
+                        <h4><a [routerLink]="['/group/' + user.id] " title="">{{user.name}}</a></h4>
+                        <a [routerLink]="['/group/' + user.id] " title="" class="add-butn" data-ripple="">Nhóm</a>
+
+
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+                <div class="lodmore" *ngIf="listGroupUser != null && check1">
+                  <button (click)="decrementPageAll()" class="btn-view btn-load-more"></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="menu1" class="container tab-pane fade"><br>
+          <form [formGroup]="fromSearchAdvanced">
+            <div class="row">
+
+              <div class="col-4">
+                <div class="form-group" style=" width: 37%; margin-right: 80px;">
+                  <mat-form-field style="height: 52px;background-color: rgba(0, 0, 0, 0.04);border-radius: 5px">
+                    <mat-label></mat-label>
+                    <input matInput formControlName="job">
+                  </mat-form-field>
+                  <label class="control-label">
+                    <small style="color: #088DCD;">Nghề nghiệp</small>
+                  </label>
+                </div>
+              </div>
+
+              <div class="col-4 ">
+                <div class="form-group" style=" width: 37%; margin-right: 80px;">
+                  <mat-form-field appearance="fill">
+                    <mat-label></mat-label>
+                    <mat-select formControlName="hobby">
+                      <mat-option value=""></mat-option>
+                      <mat-option *ngFor="let hobby of listHobby" [value]="hobby.name">{{hobby.name}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <label class="control-label">
+                    <small style="color: #088DCD;">Sở thích</small>
+                  </label>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-group" style=" width: 37%;">
+                  <mat-form-field appearance="fill">
+                    <mat-label></mat-label>
+                    <mat-select formControlName="gender" id="dating_gender">
+                      <mat-option value=""></mat-option>
+                      <mat-option value="Male">Nam</mat-option>
+                      <mat-option value="Female">Nữ</mat-option>
+                      <mat-option value="Other">Khác</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <label class="control-label" for="dating_gender">
+                    <small style="color: #088dcd;">Giới tính</small></label>
+                </div>
+
+              </div>
+              <div class="col-4">
+                <div class="form-group" style=" width: 37%; margin-right: 80px;">
+                  <mat-form-field style="height: 52px;background-color: rgba(0, 0, 0, 0.04);border-radius: 5px">
+                    <mat-label></mat-label>
+                    <input matInput formControlName="startAge">
+                  </mat-form-field>
+                  <label class="control-label">
+                    <small style="color: #088DCD;">Năm sinh từ</small>
+                  </label>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-group" style=" width: 50%; margin-right: 60px;">
+                  <mat-form-field
+                    style="height: 52px;background-color: rgba(0, 0, 0, 0.04);border-radius: 5px;width: 200px">
+                    <mat-label></mat-label>
+                    <input matInput formControlName="endAge">
+                  </mat-form-field>
+                  <label class="control-label">
+                    <small style="color: #088DCD;">Năm sinh đến</small>
+                  </label>
+                </div>
+                <p *ngIf="message != null" style="color: red">{{message}} <label>{{startYear}}</label></p>
+              </div>
+
+              <div class="col-4 ">
+                <div class="form-group" style=" width: 37%; margin-right: 80px;">
+                  <mat-form-field appearance="fill">
+                    <mat-label></mat-label>
+                    <mat-select formControlName="address">
+                      <mat-option value=""></mat-option>
+                      <mat-option *ngFor="let address of listAddress"
+                                  [value]="address.name">{{address.name}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <label class="control-label">
+                    <small style="color: #088DCD;">Nơi sống</small>
+                  </label>
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="form-group" style=" width: 37%; margin-right: 80px;">
+                  <mat-form-field style="height: 52px;background-color: rgba(0, 0, 0, 0.04);border-radius: 5px">
+                    <mat-label></mat-label>
+                    <input matInput formControlName="name">
+                  </mat-form-field>
+                  <label class="control-label">
+                    <small style="color: #088DCD;">Tên</small>
+                  </label>
+                </div>
+              </div>
+              <div class="col-12 mb-3 mt-3 text-center">
+                <button type="submit" class="btn btn-dark" (click)="searchAdvanced()">Lọc</button>
+              </div>
+            </div>
+          </form>
+          <div class="frnds">
+            <!-- Tab panes -->
+
+            <div class="tab-content">
+              <div class="tab-pane active fade show ">
+                <h2 class="text-center" *ngIf="listUser == null"> Không có dữ liệu</h2>
+                <ul class="nearby-contct" *ngFor="let user of listUser">
+                  <li *ngIf="user.status==0">
+                    <div class="nearly-pepls">
+                      <figure>
+                        <a [routerLink]="['/profile/list-post/' + user.id] " title=""><img src="{{user.imgAvatar}}" width="50px"
+                                                                         height="50px" alt=""></a>
+                      </figure>
+                      <div class="pepl-info">
+                        <h4><a [routerLink]="['/profile/list-post/' + user.id]"
+                               title="">{{user.name}}</a></h4>
+                        <span>{{user.age}} tuổi</span>
+                        <a [routerLink]="['/profile/list-post/' + user.id] " title="" class="add-butn" data-ripple="">Người dùng</a>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+                <div class="lodmore" *ngIf="listUser != null && check2">
+                  <button (click)="decrementPageUser()" class="btn-view btn-load-more"></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="menu2" class="container tab-pane fade"><br>
+          <div class="frnds">
+            <!-- Tab panes -->
+            <div class="tab-content">
+              <div class="tab-pane active fade show ">
+                <h2 class="text-center" *ngIf="listGroup == null"> Không có dữ liệu</h2>
+                <ul class="nearby-contct" *ngFor="let group of listGroup">
+                  <li>
+                    <div class="nearly-pepls">
+                      <figure>
+                        <a [routerLink]="['/group/' + group.id]" title=""><img src="{{group.imgAvatar}}" width="50px"
+                                                                               height="50px"
+                                                                               alt=""></a>
+                      </figure>
+                      <div class="pepl-info" style="padding-top: 10px">
+                        <h4><a [routerLink]="['/group/' + group.id]" title="">{{group.name}}</a></h4>
+                        <a [routerLink]="['/group/' + group.id]" title="" class="add-butn" data-ripple="">Nhóm</a>
+                      </div>
+                    </div>
+                  </li>
+
+                </ul>
+                <div class="lodmore" *ngIf="listGroup != null && check3">
+                  <button (click)="decrementPageGroup()" class="btn-view btn-load-more"></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><!-- centerl meta -->
+  <div class="col-lg-3"></div>
+</div>

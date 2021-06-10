@@ -1,0 +1,86 @@
+
+<div class="theme-layout">
+
+  <section>
+    <div class="gap gray-bg">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="row" id="page-contents">
+              <div class="col-lg-3">
+                <aside class="sidebar static">
+                  <!--side bar-->
+                  <div class="widget">
+                    <h4 class="widget-title">Các phím tắt</h4>
+                    <ul class="naves">
+                      <li>
+                        <i class="ti-mouse-alt"></i>
+                        <a title="" [routerLink]="['/dating']">Hẹn hò</a>
+                      </li>
+                      <li>
+                        <i class="ti-files"></i>
+                        <a title="" [routerLink]="['/profile']">Trang của tôi</a>
+                      </li>
+                      <li>
+                        <i class="ti-user"></i>
+                        <a title="" [routerLink]="['/profile/friend']">Bạn bè</a>
+                      </li>
+                      <li>
+                        <i class="ti-image"></i>
+                        <a title="" href="images.html">Hình ảnh</a>
+                      </li>
+                    </ul>
+                  </div><!-- Shortcuts -->
+                </aside>
+              </div><!-- sidebar -->
+              <div class="col-lg-6">
+                <div class="central-meta">
+                  <div class="row">
+                    <div class="col-6"><h1 class="ml-3">Cảnh cáo vi phạm</h1></div>
+                  </div>
+                  <div class="frnds">
+                    <span style="color: #007bff; float: right">User:<span
+                      style="float: right; color: #0e0e0e">{{member.fullName}}</span></span>
+                    <table class="table border-0">
+                      <thead>
+                      <tr>
+                        <th class="text-primary  font-weight-normal" scope="col">Nội dung vi phạm</th>
+                        <th class="text-primary  font-weight-normal" scope="col">Bài viết</th>
+                      </tr>
+                      <tbody>
+                      <tr *ngFor="let violation of violations">
+                        <td class="text-dark" scope="row">{{violation.content}}</td>
+                       <td>
+                         <a [routerLink]="['/profile/list-post/',violation.postId]">xem bài viết vi phạm</a>
+                       </td>
+                      </tr>
+                      <tr>
+                        <th colspan="2" scope="row">
+                          <div *ngIf="checkListViolation" class="dropdown">
+                            <a href="#" style="color: #007bff">Cảnh báo</a>
+                            <div class="dropdown-content">
+                              <a (click)="warning()">Cảnh cáo</a>
+                              <a (click)="banOneWeek()">Khoá 1 tuần</a>
+                              <a (click)="banOneMonth()">Khoá 1 tháng</a>
+                              <a (click)="banForever()">Khoá vĩnh viễn</a>
+
+                            </div>
+                          </div>
+                        </th>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+

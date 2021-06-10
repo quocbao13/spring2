@@ -1,0 +1,348 @@
+<div class="col-12">
+  <div class="col-3 float-left"></div>
+  <div class="col-lg-6 float-left">
+    <div class="central-meta">
+      <div class="editing-info">
+        <form [formGroup]="formEditUser">
+          <!--					Tên gọi trên web-->
+          <div class="form-group">
+            <input formControlName="fullName" type="text" id="nick_name" />
+            <label class="control-label" for="nick_name"
+              >Họ tên <span style="color: red">(*)</span></label
+            >
+            <i class="mtrl-select"></i>
+            <p
+              *ngIf="
+                formEditUser.controls.fullName.errors?.required &&
+                formEditUser.controls.fullName.touched
+              "
+              class="text-danger"
+            >
+              Vui lòng nhập họ tên!
+            </p>
+          </div>
+          <!--					Giới tính-->
+          <div class="dob">
+            <label class="control-label" for="self_gender">
+              <span style="color: #088dcd">Giới tính</span>
+              <small style="color: red">(*)</small>
+            </label>
+            <div class="form-radio">
+              <div class="radio">
+                <label>
+                  <input
+                    formControlName="gender"
+                    type="radio"
+                    checked="checked"
+                    value="Nam"
+                    name="gender"
+                    id="self_gender"
+                  /><i class="check-box"></i>Nam
+                </label>
+              </div>
+              <div class="radio">
+                <label>
+                  <input
+                    formControlName="gender"
+                    type="radio"
+                    value="Nữ"
+                    name="gender"
+                  /><i class="check-box"></i>Nữ
+                </label>
+              </div>
+              <div class="radio">
+                <label>
+                  <input
+                    formControlName="gender"
+                    type="radio"
+                    value="Khác"
+                    name="gender"
+                  /><i class="check-box"></i>Khác
+                </label>
+              </div>
+            </div>
+            <p
+              *ngIf="
+                formEditUser.controls.gender.errors?.required &&
+                formEditUser.controls.gender.touched
+              "
+              class="text-danger"
+            >
+              Vui lòng chọn giới tính!
+            </p>
+          </div>
+
+          <!--					Ngày sinh-->
+          <div class="form-group">
+            <input
+              formControlName="dayOfBirth"
+              type="date"
+              required="required"
+            />
+            <label class="control-label"
+              >Ngày sinh <span style="color: red">(*)</span></label
+            >
+            <p
+              *ngIf="
+                formEditUser.controls.dayOfBirth.errors?.required &&
+                formEditUser.controls.dayOfBirth.touched
+              "
+              class="text-danger"
+            >
+              Vui lòng nhập ngày sinh!
+            </p>
+          </div>
+          <!--        Số điện thoại -->
+          <div class="form-group">
+            <input
+              formControlName="phone"
+              type="text"
+              required="required"
+              id="phone"
+            />
+            <label class="control-label" for="phone"
+              >Số điện thoại <span style="color: red">(*)</span></label
+            ><i class="mtrl-select"></i>
+            <p
+              *ngIf="
+                formEditUser.controls.phone.errors?.required &&
+                formEditUser.controls.phone.touched
+              "
+              class="text-danger"
+            >
+              Vui lòng nhập số điện thoại!
+            </p>
+            <p
+              *ngIf="formEditUser.controls.phone.errors?.pattern"
+              class="text-danger"
+            >
+              Số điện thoại sai định dạng!
+            </p>
+          </div>
+
+          <!--					Học vấn-->
+          <div class="form-group">
+            <input formControlName="education" type="text" id="education" />
+            <label class="control-label" for="education">Học vấn</label>
+            <i class="mtrl-select"></i>
+          </div>
+          <!--					Mô tả bản thân-->
+          <div class="form-group">
+            <textarea
+              formControlName="descriptionUser"
+              id="description"
+            ></textarea>
+            <label class="control-label" for="description">Về tôi</label
+            ><i class="mtrl-select"></i>
+          </div>
+          <div class="dob">
+            <!--					Nghề nghiệp-->
+            <div class="form-group" style="width: 37%; margin-right: 80px">
+              <label class="control-label" for="job"
+                ><small style="color: #088dcd"
+                  >Công việc<span style="color: red">(*)</span></small
+                ></label
+              >
+              <mat-form-field appearance="fill">
+                <mat-label><p
+                  *ngIf="
+                    formEditUser.controls.job.errors?.required &&
+                    formEditUser.controls.job.touched
+                  "
+                  class="text-danger"
+                >
+                  Vui lòng chọn công việc!
+                </p></mat-label>
+                <mat-select formControlName="job" id="job">
+                  <mat-option value="Lập trình viên">Lập trình viên</mat-option>
+                  <mat-option value="Chuyên viên tài chính"
+                    >Chuyên viên tài chính</mat-option
+                  >
+                  <mat-option value="Sales">Sales</mat-option>
+                  <mat-option value="Chuyên viên xây dựng"
+                    >Chuyên viên xây dựng</mat-option
+                  >
+                  <mat-option value="Đầu bếp">Đầu bếp</mat-option>
+                  <mat-option value="Nhân viên y tế">Nhân viên y tế</mat-option>
+                  <mat-option value="Kế toán">Kế toán</mat-option>
+                  <mat-option value="Hướng dẫn viên du lịch"
+                    >Hướng dẫn viên du lịch</mat-option
+                  >
+                  <mat-option value="Khác">Khác</mat-option>
+                </mat-select>
+              </mat-form-field>
+              
+            </div>
+
+            <!--					Tình trạng hôn nhân-->
+            <div class="form-group">
+              <label class="control-label">
+                <small style="color: #088dcd"
+                  >Tình trạng hôn nhân<span style="color: red">(*)</span></small
+                >
+              </label>
+              <mat-form-field appearance="fill">
+                <mat-label><p
+                  *ngIf="
+                    formEditUser.controls.married.errors?.required &&
+                    formEditUser.controls.married.touched
+                  "
+                  class="text-danger"
+                >
+                  Vui lòng chọn tình trạng hôn nhân!
+                </p></mat-label>
+                <mat-select formControlName="married" id="martial_status">
+                  <mat-option value="Độc thân">Độc thân</mat-option>
+                  <mat-option value="Đã kết hôn">Đã kết hôn</mat-option>
+                  <mat-option value="Khác">Khác</mat-option>
+                </mat-select>
+              </mat-form-field>
+              
+            </div>
+          </div>
+          <div class="dob">
+            <!--					Sở thích-->
+            <div class="form-group " style="width: 37%; margin-right: 80px">
+              <label class="control-label">
+                <small style="color: #088dcd"
+                  >Sở thích <span style="color: red">(*)</span></small
+                >
+              </label>
+              <mat-form-field appearance="fill">
+                <mat-label> <p
+                  *ngIf="
+                    formEditUser.controls.hobbyChoose.errors?.required &&
+                    formEditUser.controls.hobbyChoose.touched
+                  "
+                  class="text-danger"
+                >
+                  Vui lòng chọn sở thích!
+                </p>
+                 </mat-label>
+                <mat-select
+                  [compareWith]="compareFunction"
+                  formControlName="hobbyChoose"
+                  multiple
+                  [(ngModel)]="selection"
+                >
+                <mat-option *ngFor="let hobby of hobbys" [value]="hobby">{{
+                    hobby.name
+                  }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              
+            </div>
+            <!--        Giới tính muốn hẹn hò -->
+            <div class="form-group" style="width: 37%">
+              <label class="control-label" for="dating_gender"
+                ><small style="color: #088dcd"
+                  >Giới tính muốn hẹn hò<span style="color: red"
+                    >(*)</span
+                  ></small
+                ></label
+              >
+              <mat-form-field appearance="fill">
+                <mat-label><p
+                  *ngIf="
+                    formEditUser.controls.datingGender.errors?.required &&
+                    formEditUser.controls.datingGendertouched
+                  "
+                  class="text-danger"
+                >
+                  Vui lòng chọn giới tính muốn hẹn hò!
+                </p></mat-label>
+                <mat-select formControlName="datingGender" id="dating_gender">
+                  <mat-option value="Nam">Nam</mat-option>
+                  <mat-option value="Nữ">Nữ</mat-option>
+                  <mat-option value="Khác">Khác</mat-option>
+                </mat-select>
+              </mat-form-field>
+              
+            </div>
+          </div>
+
+          <!--					Tỉnh thành, quận huyện-->
+          <div class="dob">
+            <div class="form-group" style="width: 37%; margin-right: 80px">
+              <label class="control-label">
+                <small style="color: #088dcd"
+                  >Tỉnh thành <span style="color: red">(*)</span></small
+                >
+              </label>
+              <mat-form-field appearance="fill">
+                <mat-label><p
+                  *ngIf="
+                    formEditUser.controls.province.errors?.required &&
+                    formEditUser.controls.province.touched
+                  "
+                  class="text-danger"
+                >
+                  Vui lòng chọn tỉnh thành!
+                </p></mat-label>
+                <mat-select
+                  [compareWith]="compareFunction"
+                  formControlName="province"
+                  id="province"
+                  [(ngModel)] = "userInfo.district.province"
+                >
+                  <mat-option
+                    *ngFor="let province of provinces"
+                    [value]="province"
+                    >{{ province.name }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+              
+            </div>
+            <div class="form-group" style="width: 37%" (click)="getDistrict()">
+              <label class="control-label" for="district">
+                <small style="color: #088dcd"
+                  >Quận, huyện<span style="color: red">(*)</span></small
+                >
+              </label>
+              <mat-form-field appearance="fill">
+                <mat-label> <p
+                  *ngIf="
+                    formEditUser.controls.district.errors?.required &&
+                    formEditUser.controls.district.touched
+                  "
+                  class="text-danger"
+                >
+                  Vui lòng chọn quận huyện!
+                </p></mat-label>
+                <mat-select
+                  [compareWith]="compareFunction"
+                  formControlName="district"
+                  id="district"
+                  [(ngModel)] = "userInfo.district"
+                >
+                  <mat-option
+                    *ngFor="let district of districts"
+                    [value]="district"
+                    >{{ district.prefix }} {{ district.name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+             
+            </div>
+          </div>
+
+          <!--					 Các button-->
+          <div class="submit-btns">
+            <button [routerLink]="['/profile']" type="button" class="mtr-btn"><span>Trở lại</span></button>
+            <button type="button" (click)="editUser()" class="mtr-btn ml-2">
+              <span>Lưu</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- center meta -->
+</div>
+
+<script>
+  $(document).ready(function () {
+    $(".js-example-basic-multiple").select2();
+  });
+</script>

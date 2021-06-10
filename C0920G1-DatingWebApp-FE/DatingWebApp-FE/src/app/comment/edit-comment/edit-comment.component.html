@@ -1,0 +1,37 @@
+<div class="post-comment" style="display: flex">
+  <!--                        Ảnh user đang đăng nhập nick-->
+  <div class="comet-avatar" >
+    <img src="https://taimienphi.vn/tmp/cf/aut/mAKI-top-anh-dai-dien-dep-chat-1.jpg" alt=""
+         style="vertical-align: middle;width: 50px;height: 50px; border-radius: 50%">
+  </div>
+  <div class="post-comt-box">
+    <form [formGroup]="formEdit" (ngSubmit)="updateComment(formEdit.value)" >
+      <div style="position: relative">
+        <input placeholder="Viết bình luận..." style="resize: none;border: 1px solid #eeeeee;
+                            border-radius: 6px 6px 0 0;padding: 10px;width: 100%;border-bottom: 0;
+                            background: #f3f3f3 none repeat scroll 0 0"
+               formControlName="content">
+        <div (click)="fileUploader.click()" class="add-smiles"><i class="fa fa-image"></i></div>
+      </div>
+      <br>
+      <img [src]="imgSrc" width="100px" height="100px" *ngIf="isCheck" >
+      <div class="item" style="clear: both">
+        <label class="col-2 float-left" for="image">
+        </label>
+        <input hidden class="col-6 form-control float-left"  type="file" accept="image/*" #fileUploader
+               id="image" (change)="showPreview($event)">
+      </div>
+
+      <!--                            <div class="add-smiles" style="margin-right: 20px">-->
+      <!--                              <i class="far fa-image"></i>-->
+      <!--                              <label class="fileContainer">-->
+      <!--                                <input type="file">-->
+      <!--                              </label>-->
+      <!--                            </div>-->
+      <!--                            <div class="add-smiles">-->
+      <!--                              <i class="far fa-smile-beam"></i>-->
+      <!--                            </div>-->
+      <input type="submit" style="position: absolute; left: -9999px"/>
+    </form>
+  </div>
+</div>

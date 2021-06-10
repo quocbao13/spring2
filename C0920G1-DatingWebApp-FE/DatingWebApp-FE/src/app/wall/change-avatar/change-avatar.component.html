@@ -1,0 +1,7 @@
+<input #_fileInput type="file" (change)="openCropperDialog($event)" accept="image/*" hidden>
+
+<button ly-button color="primary" (click)="_fileInput.click()">
+  <ly-icon [lyMf]="1">image</ly-icon>
+  <span>Select File</span>
+</button>
+<img [src]="imgSrc" style="width: 200px; height: 200px;">

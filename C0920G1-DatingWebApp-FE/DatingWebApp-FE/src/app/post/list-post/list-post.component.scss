@@ -1,0 +1,25 @@
+.create-post{
+  //width: 525px;
+  height: 150px;
+  background: #FDFDFD;
+  margin: 0 auto 20px auto;
+  padding: 25px;
+}
+.box-post{
+  height: 100%;
+  width: 100%;
+}
+.box-post figure img{
+  height: 49px;
+  width: 49px;
+  border-radius: 25px;
+}
+.content-post{
+  border: 1px solid #eee;
+  padding: 10px;
+  text-align: right;
+  background: #fff;
+  float: right;
+  width: 90%;
+  height: 100px;
+}

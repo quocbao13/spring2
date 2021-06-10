@@ -1,0 +1,179 @@
+<section>
+  <div class="gap gray-bg">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="row" id="page-contents">
+            <div class="col-lg-3">
+              <aside class="sidebar static">
+                <!--                                    <div class="widget">-->
+                <!--                                        <h4 class="widget-title">Hoạt động gần đây</h4>-->
+                <!--                                        <ul class="activitiez">-->
+                <!--                                            <li>-->
+                <!--                                                <div class="activity-meta">-->
+                <!--                                                    <i>10 giờ trước</i>-->
+                <!--                                                    <span><a title="" href="#">Nhận xét video đã đăng</a></span>-->
+                <!--                                                    <h6>by <a href="time-line.html">Võ Hoài Linh</a></h6>-->
+                <!--                                                </div>-->
+                <!--                                            </li>-->
+                <!--                                            <li>-->
+                <!--                                                <div class="activity-meta">-->
+                <!--                                                    <i>30 ngày trước</i>-->
+                <!--                                                    <span><a title="" href="#">Đã đăng trạng thái. “Hello guys, how are you?”</a></span>-->
+                <!--                                                </div>-->
+                <!--                                            </li>-->
+                <!--                                            <li>-->
+                <!--                                                <div class="activity-meta">-->
+                <!--                                                    <i>2 năm trước</i>-->
+                <!--                                                    <span><a title="" href="#">Chia sẻ 1 video của bạn trên dòng thời gian.</a></span>-->
+                <!--                                                    <h6>"<a href="#">Tuyển phi công ahihi</a>"</h6>-->
+                <!--                                                </div>-->
+                <!--                                            </li>-->
+                <!--                                        </ul>-->
+                <!--                                    </div>-->
+                <div class="widget stick-widget">
+                  <h4 class="widget-title">Chỉnh sửa thông tin</h4>
+                  <ul class="naves">
+                    <li>
+                      <i class="ti-info-alt"></i>
+                      <a href="edit-profile-basic.html" title="">Thông tin cơ bản</a>
+                    </li>
+                    <li>
+                      <i class="ti-mouse-alt"></i>
+                      <a href="edit-work-eductation.html" title="">Giáo dục & Công việc</a>
+                    </li>
+                    <li>
+                      <i class="ti-heart"></i>
+                      <a href="edit-interest.html" title="">Sở thích của tôi</a>
+                    </li>
+                    <li>
+                      <i class="ti-settings"></i>
+                      <a href="edit-account-setting.html" title="">cài đặt tài khoản</a>
+                    </li>
+                    <li>
+                      <i class="ti-lock"></i>
+                      <a href="edit-password.html" title="">đổi mật khẩu</a>
+                    </li>
+                  </ul>
+                </div><!-- settings widget -->
+              </aside>
+            </div><!-- sidebar -->
+            <div class="col-lg-6">
+              <div class="central-meta">
+                <div class="editing-info">
+                  <h3 class="f-title">Tạo nhóm mới</h3>
+                  <p class="title_note">
+                    Tạo không gian tuyệt vời để hoàn thành công việc và chỉ liên lạc với những người bạn muốn. Hãy chia
+                    sẻ ảnh và video, trò chuyện, lên kế hoạch và nhiều hoạt động khác với những người bạn trên C0920G1.
+                  </p>
+                  <form [formGroup]="formCreate">
+                    <div class="title_text">Tên nhóm <span style="color: red">*</span></div>
+                    <div>
+                      <div class="form-group">
+                        <input type="text" id="input" required="required" formControlName="name"/>
+                        <label class="control-label" for="input">Tên nhóm</label><i class="mtrl-select"></i>
+                        <div *ngIf="formCreate.controls.name.errors && formCreate.controls.name.touched"
+                             class="text-danger">Tên nhóm không được để trống</div>
+                      </div>
+                    </div>
+                    <div class="title_text">Loại nhóm</div>
+                    <div class="btn-group-lg dropdown type_group">
+                      <div class="button_type_public">
+                        <img src="https://www.gapo.vn/assets/icons/group-public.svg" alt="" style="margin-right: 10px">
+                        <div>
+                          <div>Công khai</div>
+                          <div>Tất cả mọi người đều xem được bài viết trong nhóm</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="title_text">Chọn ảnh bìa</div>
+                    <div class="main_form_img">
+                      <div class="img_upload">
+                        <a class="d-flex align-items-center justify-content-center" tabindex="0">
+                          <input type="file" id="img" name="img" accept="image/*" style="display: none;" formControlName="backgroundGroup"
+                          (change)="selectImg($event)">
+                          <label style="cursor: pointer; margin-bottom: 0" for="img">
+                            <img style="margin-right: 2px; width: 533px; height: 300px" [src]="imgSrc">
+                            Chọn ảnh từ máy tính </label>
+                        </a>
+                      </div>
+                      <div class="note_upload_img">
+                        <p>C0920G1 khuyến khích bạn sử dụng ảnh có kích thước <span>1800*672px</span>
+                          Và vùng nội dung chính của ảnh bìa cách lề mỗi bên một khoảng <span>300px</span>
+                          để đảm bảo hiển thị tốt nhất trên cả hai nên tảng Web & Mobile.</p>
+                      </div>
+                    </div>
+                    <div class="submit-btns">
+                      <button type="reset" class="mtr-btn" style="margin-right: 5px"><span>Hủy</span></button>
+                      <button (click)="createGroup()" class="mtr-btn"><span>Tạo nhóm</span></button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div><!-- centerl meta -->
+            <div class="col-lg-3">
+              <aside class="sidebar static">
+                <div class="widget">
+                  <div class="banner medium-opacity bluesh">
+<!--                    <div style="background-image: url(images/resources/baner-widgetbg.jpg)" class="bg-image"></div>-->
+                    <div class="baner-top">
+                      <span><img src="images/book-icon.png" alt=""></span>
+                      <i class="fa fa-ellipsis-h"></i>
+                    </div>
+                    <div class="banermeta">
+                      <p>
+                        Trở thành lập trình viên ngay chỉ với 6 tháng
+                      </p>
+                      <span>Chi tiết</span>
+                      <a href="#" title="" data-ripple="">Bắt đầu ngay!</a>
+                    </div>
+                  </div>
+                </div>
+                <!--                                    <div class="widget stick-widget">-->
+                <!--                                        <h4 class="widget-title">ai đang theo dõi bạn</h4>-->
+                <!--                                        <ul class="followers">-->
+                <!--                                            <li>-->
+                <!--                                                <figure><img src="images/resources/friend-avatar2.jpg" alt=""></figure>-->
+                <!--                                                <div class="friend-meta">-->
+                <!--                                                    <h4><a href="time-line.html" title="">Mai Đào</a></h4>-->
+                <!--                                                    <a href="#" title="" class="underline">Kết bạn</a>-->
+                <!--                                                </div>-->
+                <!--                                            </li>-->
+                <!--                                            <li>-->
+                <!--                                                <figure><img src="images/resources/friend-avatar4.jpg" alt=""></figure>-->
+                <!--                                                <div class="friend-meta">-->
+                <!--                                                    <h4><a href="time-line.html" title="">Lê Thị Bông</a></h4>-->
+                <!--                                                    <a href="#" title="" class="underline">Kết bạn</a>-->
+                <!--                                                </div>-->
+                <!--                                            </li>-->
+                <!--                                            <li>-->
+                <!--                                                <figure><img src="images/resources/friend-avatar6.jpg" alt=""></figure>-->
+                <!--                                                <div class="friend-meta">-->
+                <!--                                                    <h4><a href="time-line.html" title="">Phan Công Ó</a></h4>-->
+                <!--                                                    <a href="#" title="" class="underline">Kết bạn</a>-->
+                <!--                                                </div>-->
+                <!--                                            </li>-->
+                <!--                                            <li>-->
+                <!--                                                <figure><img src="images/resources/friend-avatar8.jpg" alt=""></figure>-->
+                <!--                                                <div class="friend-meta">-->
+                <!--                                                    <h4><a href="time-line.html" title="">Ngọc Trinh</a></h4>-->
+                <!--                                                    <a href="#" title="" class="underline">Kết bạn</a>-->
+                <!--                                                </div>-->
+                <!--                                            </li>-->
+                <!--                                            <li>-->
+                <!--                                                <figure><img src="images/resources/friend-avatar3.jpg" alt=""></figure>-->
+                <!--                                                <div class="friend-meta">-->
+                <!--                                                    <h4><a href="time-line.html" title="">C.Ronaldo</a></h4>-->
+                <!--                                                    <a href="#" title="" class="underline">Kết bạn</a>-->
+                <!--                                                </div>-->
+                <!--                                            </li>-->
+                <!--                                        </ul>-->
+                <!--                                    </div>&lt;!&ndash; who's following &ndash;&gt;-->
+              </aside>
+            </div><!-- sidebar -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,107 @@
+<div class="col-12">
+  <div class="col-3 float-left"></div>
+  <div class="col-lg-6 float-left">
+    <div class="central-meta">
+      <div class="editing-info">
+        <form [formGroup]='formUserInfoDetail'>
+          <!--					Ảnh đại diện, ảnh background đã chọn-->
+          <div class="dob">
+            <!--					 Ảnh đại diện đã chọn-->
+            <div class="form-group" style="width: 37%; margin-right: 80px;">
+              <label for="img_avatar_choosen" style="color: #088dcd;">Ảnh đại diện đã chọn: </label>
+              <img [src]="userExisting.avatar"
+                   id="img_avatar_choosen"
+                   style="width: 250px; height: 250px">
+            </div>
+            <!--					Ảnh background đã chọn-->
+            <div class="form-group" style="width: 40.6%">
+              <label for="image_background_choosen" style="color: #088dcd;">Ảnh nền đã chọn: </label>
+              <img [src]="userExisting.background"
+                   id="image_background_choosen"
+                   style="width: 250px; height: 250px">
+            </div>
+          </div>
+          <h3 class="f-title"><i class="ti-info-alt"></i>Thông tin cá nhân đã nhập</h3>
+          <br>
+          <!--					Tên gọi trên web-->
+          <div >
+            <span style="color: #088dcd">Họ tên: </span>
+            <span style="color: #0e0e0e">{{userExisting.fullName}}</span>
+            <br><hr>
+          <!--					Giới tính-->
+          </div>
+          <div>
+            <span style="color: #088dcd">Giới tính: </span>
+            <span style="color: #0e0e0e">{{userExisting.gender}}</span>
+            <br><hr>
+          </div>
+          <!--					Ngày sinh-->
+          <div>
+            <span style="color: #088dcd">Ngày sinh: </span>
+            <span style="color: #0e0e0e">{{userExisting.dayOfBirth | date:"dd-MM-yyyy"}}</span>
+            <br><hr>
+          </div>
+          <!--					Học vấn-->
+          <div>
+            <span style="color: #088dcd">Học vấn: </span>
+            <span style="color: #0e0e0e">{{userExisting.education}}</span>
+            <br><hr>
+          </div>
+          <!--					Nghề nghiệp-->
+          <div>
+            <span style="color: #088dcd">Nghề nghiệp: </span>
+            <span style="color: #0e0e0e">{{userExisting.job}}</span>
+            <br><hr>
+          </div>
+          <!--					Số điện thoại-->
+          <div>
+            <span style="color: #088dcd">Số điện thoại: </span>
+            <span style="color: #0e0e0e">{{userExisting.phone}}</span>
+            <br><hr>
+          </div>
+          <!--					Tình trạng hôn nhân-->
+          <div>
+            <span style="color: #088dcd">Tình trạng hôn nhân: </span>
+            <span style="color: #0e0e0e">{{userExisting.married}}</span>
+            <br><hr>
+          </div>
+          <!--					Sở thích-->
+          <div>
+            <span style="color: #088dcd">Sở thích: </span>
+            <span style="color: #0e0e0e" *ngFor="let userHobby of userExisting.userHobbySet">{{userHobby.hobby.name}} -  </span>
+            <br><hr>
+          </div>
+          <!--					Giới tính muốn hẹn hò-->
+          <div>
+            <span style="color: #088dcd">Giới tính muốn hẹn hò: </span>
+            <span style="color: #0e0e0e">{{userExisting.datingGender}}</span>
+            <br><hr>
+          </div>
+          <!--					Về tôi-->
+          <div>
+            <span style="color: #088dcd">Về tôi: </span>
+            <span style="color: #0e0e0e">{{userExisting.descriptionUser}}</span>
+            <br><hr>
+          </div>
+          <!--					Tỉnh thành-->
+          <div>
+            <span style="color: #088dcd">Tỉnh thành: </span>
+            <span style="color: #0e0e0e">{{userExisting.district.province.name}}</span>
+            <br><hr>
+          </div>
+          <!--					Quận huyện-->
+          <div>
+            <span style="color: #088dcd">Quận huyện: </span>
+            <span style="color: #0e0e0e">{{userExisting.district.name}}</span>
+            <br><hr>
+          </div>
+          <!--					 Các button-->
+
+          <div class="submit-btns col-12 text-center">
+            <button type="button" [routerLink]="['/post-list']" class="mtr-btn"><span>Bắt đầu</span></button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div><!-- center meta -->
+</div>

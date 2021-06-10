@@ -1,0 +1,9 @@
+<mat-dialog-content>
+  <p>
+    Bạn có chắc muốn chặn {{dataTemp}}  không?
+  </p>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <button mat-raised-button color="warn" (click)="onConfirmClick(true)" tabindex="1">Đồng ý</button>
+  <button mat-raised-button mat-dialog-close tabindex="-1">Trở Lại</button>
+</mat-dialog-actions>

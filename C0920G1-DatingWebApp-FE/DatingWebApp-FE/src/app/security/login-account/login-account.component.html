@@ -1,0 +1,147 @@
+<div class="my-container">
+  <ng-template #customLoadingTemplate>
+
+  </ng-template>
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"
+               [template]="customLoadingTemplate"></ngx-loading>
+</div>
+
+<div class="theme-layout">
+  <div class="row">
+    <div class="container-fluid pdng0">
+      <div class="row merged">
+
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 content-dating">
+          <div class="land-featurearea color-dating"></div>
+          <div class="top-color-dating">
+          </div>
+          <div class="content-bg-dating">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="float: left">
+              <img src="../../../assets/img/logo-black.png">
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="float: right">
+              <div class="login-reg-bg" style="background: none">
+                <div class="log-reg-area sign">
+                  <h2 class="log-title">Đăng nhập</h2>
+                  <form [formGroup]="formLogin" (ngSubmit)="onSubmit()">
+                    <div class="form-group">
+                      <input type="text" id="input" (input)="checkInput('email')" required="required"
+                             formControlName="email"/>
+                      <label class="control-label" for="input">Email</label><i
+                      class="mtrl-select"></i>
+                      <p class="text-danger mb-0 mt-0" *ngIf="listError.nameError=='notExistEmail'">{{listError.message}}</p>
+                      <p class="text-danger mb-0 mt-0" *ngIf="listError.nameError=='notEnable'">{{listError.message}}</p>
+                    </div>
+                    <div class="form-group mt-0">
+                      <p *ngIf="formLogin.get('email').hasError('required') && formLogin.get('email').touched && !isCheck"
+                         class="text-danger mb-0 mt-0">Vui lòng nhập email!</p>
+                      <p *ngIf="formLogin.get('email').hasError('pattern') && formLogin.get('email').touched && !isCheck"
+                         class="text-danger mt-0">Email phải đúng định dạng abc@xyz.xyz!</p>
+                      <p class="text-danger" *ngIf="isCheck">{{listError.email}}</p>
+                    </div>
+                    <div class="form-group mt-2">
+                      <input type="password" (input)="checkInput('password')" required="required" formControlName="password"/>
+                      <label class="control-label" for="input">Mật khẩu</label><i
+                      class="mtrl-select"></i>
+                    </div>
+                    <div class="form-group mt-0 mb-0">
+                      <p
+                        *ngIf="formLogin.get('password').hasError('required') && formLogin.get('password').touched && !isCheck"
+                        class="text-danger mb-0 mt-0">Vui lòng nhập mật khẩu!</p>
+                      <p class="text-danger mb-0 mt-0" *ngIf="isCheck">{{listError.password}}</p>
+                      <p class="text-danger mb-0 mt-0" *ngIf="checkPass">{{checkPass}}</p>
+                      <p class="text-danger mb-0 mt-0" *ngIf="listError.nameError=='bannedAccount'">{{listError.message}}</p>
+                    </div>
+                    <!--              <div class="checkbox">-->
+                    <!--                <label>-->
+                    <!--                  <input type="checkbox" checked="checked"/><i class="check-box"></i>Ghi nhớ đăng nhập.-->
+                    <!--                </label>-->
+                    <!--              </div>-->
+                    <!--              <a href="#" title="" class="forgot-pwd mt-3">Quên mật khẩu?</a>-->
+                    <div class="submit-btns text-center">
+                      <button style="width: 49%" (keyup.enter)="onSubmit()" class="mtr-btn signin mr-1" type="submit"><span>Đăng nhập</span>
+                      </button>
+                      <button style="width: 49%" class="mtr-btn signup" type="button"><span>Đăng ký</span></button>
+                    </div>
+                    <div style="clear: both">
+                      <button (click)="openDialogFacebook()" type="button" class="mtr-btn"
+                              style="width: 99%; margin-left: 2px">
+                                <span><img src="../../../assets/img/facebook-logo-2019-1597680-1350125.webp" alt=""
+                                           width="22px"
+                                           height="22px"></span>
+                        <span> Đăng nhập bằng FaceBook</span>
+                      </button>
+                    </div>
+                  </form>
+                </div>
+
+
+                <div class="log-reg-area reg">
+                  <h2 class="log-title">Đăng ký</h2>
+                  <form focusInvalidInput [formGroup]="formRegister" (ngSubmit)="onSubmitRegister()">
+                    <div class="form-group">
+                      <input type="text" (input)="checkInput('email1')" required="required" formControlName="email"/>
+                      <label class="control-label" for="input"><a
+                        class="__cf_email__"
+                        data-cfemail="6c29010d05002c">Email (<span class="text-danger">*</span>)</a></label><i
+                      class="mtrl-select"></i>
+                      <p
+                        *ngIf="formRegister.get('email').hasError('required') && formRegister.get('email').touched && !isCheck1"
+                        class="text-danger mb-0 mt-0">Vui lòng nhập email!</p>
+                      <p
+                        *ngIf="formRegister.get('email').hasError('pattern') && formRegister.get('email').touched && !isCheck1"
+                        class="text-danger mb-0 mt-0">Email phải đúng định dạng abc@xyz.xyz!</p>
+                      <p class="text-danger" *ngIf="isCheck1">{{listError.email}}</p>
+                      <p class="text-danger" *ngIf="isCheck1">{{listError.existEmail}}</p>
+                    </div>
+                    <div class="form-group mt-0">
+                      <input type="password" (input)="checkInput('password1')" required="required"
+                             formControlName="password"/>
+                      <label class="control-label" for="input">Mật khẩu (<span class="text-danger">*</span>)</label><i
+                      class="mtrl-select"></i>
+                      <p
+                        *ngIf="formRegister.get('password').hasError('required') && formRegister.get('password').touched && !isCheck1"
+                        class="text-danger mt-0">Vui lòng nhập mật khẩu!</p>
+                      <p class="text-danger" *ngIf="isCheck1">{{listError.password}}</p>
+                    </div>
+                    <div class="form-group mt-1">
+                      <input type="password" required="required" formControlName="checkPassword"/>
+                      <label class="control-label" for="input">Xác nhận mật khẩu</label><i class="mtrl-select"></i>
+                      <p class="text-danger" *ngIf="listError.checkPass">{{listError.checkPass}}</p>
+                    </div>
+
+                    <div class="form-group">
+                      <label style="font-size: 13px">Nội quy diễn đàn
+                      </label>
+                    </div>
+                    <div style="height: 70px; overflow: auto; border: 1px solid black">
+                <span>Tuki tạo ra các công nghệ và dịch vụ nhằm hỗ trợ mọi người kết nối với nhau, xây dựng cộng đồng và phát triển doanh nghiệp. Các Điều khoản này điều chỉnh việc bạn sử dụng Tuki, dating và các sản phẩm, tính năng, ứng dụng, dịch vụ, công nghệ cũng như phần mềm khác mà chúng tôi cung cấp, trừ khi chúng tôi nêu rõ là áp dụng các điều khoản riêng (và không áp dụng các điều khoản này).Bạn không mất phí sử dụng Tuki hay các sản phẩm và dịch vụ khác thuộc phạm vi điều chỉnh của những Điều khoản này. Thay vào đó, các doanh nghiệp và tổ chức sẽ phải trả tiền cho chúng tôi để hiển thị quảng cáo sản phẩm và dịch vụ của họ cho bạn. Khi sử dụng Sản phẩm của chúng tôi, bạn đồng ý để chúng tôi hiển thị quảng cáo mà chúng tôi cho rằng phù hợp với bạn cũng như sở thích của bạn. Chúng tôi sử dụng dữ liệu cá nhân của bạn để quyết định nên hiển thị quảng cáo nào cho bạn.Chúng tôi không bán dữ liệu cá nhân của bạn cho các nhà quảng cáo và cũng không chia sẻ thông tin trực tiếp nhận dạng bạn (chẳng hạn như tên, địa chỉ email hoặc thông tin liên hệ khác) với những đơn vị này trừ khi được bạn cho phép cụ thể. Thay vào đó, các nhà quảng cáo có thể cho chúng tôi biết thông tin như kiểu đối tượng mà họ muốn nhìn thấy quảng cáo và chúng tôi có thể hiển thị những quảng cáo ấy cho người có thể quan tâm. Chúng tôi báo cáo cho các nhà quảng cáo về hiệu quả quảng cáo, từ đó những đơn vị này có thể nắm được cách mọi người tương tác với nội dung của họ. Xem Phần 2 bên dưới để tìm hiểu thêm.Chính sách dữ liệu của chúng tôi giải thích cách chúng tôi thu thập và sử dụng dữ liệu cá nhân của bạn để quyết định hiển thị cho bạn quảng cáo nào, cũng như để cung cấp tất cả các dịch vụ khác được mô tả bên dưới. Bạn cũng có thể chuyển đến phần cài đặt bất kỳ lúc nào để xem lại các lựa chọn quyền riêng tư của mình đối với cách chúng tôi sử dụng dữ liệu của bạn.
+                                </span>
+                    </div>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" checked="checked" formControlName="checkPolicy"/><i class="check-box"></i>Chấp
+                        nhập điều
+                        khoản &
+                        điều kiện đăng ký ?
+                      </label>
+                    </div>
+                    <a href="#" title="" class="already-have">Sử dụng tài khoản đã có</a>
+                    <p class="text-danger" *ngIf="listError.checkPolicy">{{listError.checkPolicy}}</p>
+                    <div class="submit-btns">
+                      <button (click)="onSubmitRegister()" class="mtr-btn signup" type="button"><span>Đăng ký</span></button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

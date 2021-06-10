@@ -1,0 +1,86 @@
+.c09_body {
+    background-color: #f2f2f2;
+    display: flex;
+    justify-content: center;
+}
+.main {
+    flex-direction: column;
+    width: 520px;
+    height: auto;
+    padding-bottom: 20px;
+}
+.main_title {
+    padding: 20px;
+}
+.title_note {
+    font-size: small;
+}
+.main_form {
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 1px, rgba(0, 0, 0, 0.1) 4px 8px 16px;
+    background-color: rgb(255, 255, 255);
+}
+.main_form_content {
+    width: 100%;
+    height: 100%;
+}
+.form_input input {
+    border-radius: 12px;
+    border: 0.5px solid gray;
+    padding: 10px 10px;
+    width: 100%;
+    height: 38px;
+    outline: none;
+    margin-bottom: 15px;
+}
+.title_text {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.type_group {
+    margin-bottom: 1rem;
+    min-width: 200px;
+}
+.button_type {
+    border: 1px solid gray;
+    box-sizing: border-box;
+    border-radius: 9px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 15px;
+}
+.button_type_public {
+    display: flex;
+    flex-direction: row;
+}
+.main_form_img {
+    padding: 20px 15px;
+    border-radius: 7px;
+    border: 0.5px solid gray;
+    text-align: center;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+}
+.img_upload {
+    border-radius: 40px;
+    display: inline-block;
+    box-sizing: border-box;
+    align-items: center;
+    padding: 8px 12px;
+    margin-bottom: 15px;
+}
+.note_upload_img {
+    font-size: small;
+}
+.note_upload_img span{
+    font-weight: bolder;
+}
+.button_add button{
+    border-radius: 9px;
+    box-sizing: border-box;
+    width: 100%;
+}

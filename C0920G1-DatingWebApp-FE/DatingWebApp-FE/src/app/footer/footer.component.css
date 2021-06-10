@@ -1,0 +1,20 @@
+#footer {
+  background: #121d24;
+  padding: 0 0 30px 0;
+  color: #fff;
+  font-size: 14px;
+}
+
+footer::before {
+  background: white;
+}
+
+.dmca {
+  cursor: pointer;
+}
+
+.dmca:hover {
+  color: red;
+}
+
+/*# sourceMappingURL=footer.component.css.map */

@@ -1,0 +1,307 @@
+<!--//Khanh-->
+<div class="my-container-abc">
+  <ng-template #customLoadingTemplate>
+  </ng-template>
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>
+</div>
+<!--//Khanh-->
+<section>
+  <div class="gap gray-bg">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="row" id="page-contents">
+            <div class="col-lg-3">
+              <aside class="sidebar static">
+                <div class="widget stick-widget">
+                  <div style="cursor: pointer; margin-left: 16px; margin-top: 20px; margin-bottom: 20px">
+                    <a title="" [routerLink]="['/profile/list-post/' + idUser]">
+                      <img src="{{avatarUser}}" alt="" style="vertical-align: middle;width: 50px;height: 50px; border-radius: 50%">
+                      <span> <b> {{userName}}</b></span>
+                    </a>
+                  </div>
+                  <ul >
+                    <li>
+                      <span style="font-size: 20px">💑 </span>
+                      <a title="" [routerLink]="['/dating']">Hẹn hò</a>
+                    </li>
+                    <li>
+                      <span style="font-size: 20px">📃 </span>
+                      <a title="" [routerLink]="['/profile/list-post/' + idUser]">Trang của tôi</a>
+                    </li>
+                    <li>
+                      <span style="font-size: 20px">🤝 </span>
+                      <a title="" [routerLink]="['/profile/friend']">Bạn bè</a>
+                    </li>
+                    <li>
+                      <span style="font-size: 20px">📸 </span>
+                      <a title="" href="images.html">Hình ảnh</a>
+                    </li>
+                  </ul>
+                </div>
+              </aside>
+            </div><!-- sidebar -->
+            <div class="col-lg-6">
+              <!--								Hiển thị bài đăng-->
+              <!--//Khanh-->
+              <div class="create-post" style="border: 0.5px;border-radius: 10px; box-shadow:  0.5px 1px 1px 1px #BEC3C9; height: 100px; width: 100%" >
+                <div class="box-post">
+                  <figure style="display: flex">
+                    <img src="{{avatarUser}}">
+                    <div class="content-post ml-3" (click)="openDialog()" style="border: 0.5px;border-radius: 20px;
+                    background-color: #F0F2F5; height: 40px; cursor: pointer; margin-top: 3px">
+                      <span style="float: left; color: #65676B; position: relative" >Cùng nhau chia sẻ nào {{userName}} 😘</span>
+                    </div>
+                  </figure>
+                </div>
+              </div>
+              <!--\\Khanh-->
+              <div>
+                <div class="loadMore" *ngFor="let post of listPost; index as i">
+                  <div class="central-meta item" style="border: 0.5px;border-radius: 10px; box-shadow:  0.5px 1px 1px 1px #BEC3C9">
+                    <div class="user-post">
+                      <div class="friend-info">
+                        <!--Ảnh đại diện-->
+                        <figure>
+                          <img src="{{post.user.avatar}}" alt=""
+                               style="vertical-align: middle;width: 50px;height: 50px; border-radius: 50%">
+                        </figure>
+                        <!--Tên và ngày đăng bài-->
+                        <div class="friend-name">
+                          <div class="float-right" style="display: flex">
+
+                            <div *ngIf="isShown == post.user.id"  class="mr-10" (click)="openDialogEditPost(post.id)" style="cursor: pointer"><i class="fa fa-edit"></i></div>
+                            <!--                            <div *ngIf="isShown == post.user.id"><a href="#" title="Xóa" style="color: #dc3545"><i class="fa fa-trash"></i></a></div>-->
+
+                          </div>
+                          <div class="float-left"><a [routerLink]="['/profile/list-post/'+ post.user.id]">{{post.user.fullName}}</a></div>
+                          <span class="float-left">{{post.createDate | date: 'dd/MM/yyyy lúc h:mm a'}}</span>
+                        </div>
+
+                        <div class="post-meta">
+                          <!--Nội dung bài đăng-->
+                          <div class="description">
+                            <p>{{post.content}}</p>
+                          </div>
+                          <!--Ảnh bài đăng-->
+                          <div *ngFor="let img1 of post.imgSet[0].url.split(' '); index as z">
+                            <img  src="{{img1}}" *ngIf="post.imgSet[0].url.split(' ').length == 1 && img1 != ''"
+                                  (click)="showListImg(post.imgSet[0].url.split(' '))">
+                            <img  src="{{img1}}" style="width: 50%; float: left; height: 300px"
+                                  *ngIf="post.imgSet[0].url.split(' ').length > 1 && img1 != ''"
+                                  (click)="showListImg(post.imgSet[0].url.split(' '))">
+                          </div>
+                          <div class="we-video-info">
+                            <ul>
+                              <!--														Thích-->
+                              <li style=" margin-right: 20px">
+															<span class="like" title="Thích" style="cursor: pointer" (click)="createLike(post.id, i)">
+                                <i [style]="styleLike[i]" [className]="classNameLike[i]" ></i>
+															</span>
+                              </li>
+                              <!--														Bình luận-->
+                              <li>
+                                <label [htmlFor]="post.id">
+                                <span class="comment" data-toggle="tooltip" title="Bình luận" style="cursor: pointer">
+
+                                <i class="far fa-comments"></i>
+
+															</span>
+                                </label>
+                              </li>
+                              <li class="float-right" style="margin-right: auto">
+                                <div>{{post.postLikeSet.length}} lượt thích</div>
+                              </li>
+                              <li class="float-right" style="margin-right: 10px; cursor: pointer"
+                                  (click)="checkComment(i)" title="Xem bình luận">
+                                <div>{{post.commentSet.length}} bình luận</div>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                      <!--										Comment-->
+                      <!--										Ô commentPipe-->
+                      <div class="post-comment" style="display: flex">
+                        <!--                        Ảnh user đang đăng nhập nick-->
+                        <div class="comet-avatar">
+                          <img src="{{avatarUser}}" alt=""
+                               style="vertical-align: middle;width: 50px;height: 50px; border-radius: 50%">
+                        </div>
+                        <div class="post-comt-box">
+                          <form [formGroup]="formComment" (ngSubmit)="createComment(post.id, formComment.value)">
+                            <div style="position: relative">
+                              <input [id]="post.id" placeholder="Viết bình luận..." style="resize: none;border: 1px solid #eeeeee;
+                                border-radius: 6px 6px 0 0;padding: 10px;width: 100%;border-bottom: 0;
+                                background: #f3f3f3 none repeat scroll 0 0"
+                                     formControlName="content"/>
+                              <div (click)="fileUploader.click()" class="add-smiles"><i class="fa fa-image"></i></div>
+                            </div>
+                            <br>
+                            <img [src]="imgSrc" width="100px" height="100px" *ngIf="isCheck[post.id] && imgSrc !== null">
+                            <div class="item" style="clear: both">
+                              <label class="col-2 float-left" for="image">
+                              </label>
+                              <input hidden class="col-6 form-control float-left" type="file" accept="image/*"
+                                     #fileUploader
+                                     id="image" formControlName="img" (change)="showPreview($event, post.id)">
+                            </div>
+
+                            <!--                            <div class="add-smiles" style="margin-right: 20px">-->
+                            <!--                              <i class="far fa-image"></i>-->
+                            <!--                              <label class="fileContainer">-->
+                            <!--                                <input type="file">-->
+                            <!--                              </label>-->
+                            <!--                            </div>-->
+                            <!--                            <div class="add-smiles">-->
+                            <!--                              <i class="far fa-smile-beam"></i>-->
+                            <!--                            </div>-->
+                            <input type="submit" style="position: absolute; left: -9999px"/>
+                          </form>
+                        </div>
+                      </div>
+                      <!--										Hiển thị commentPipe-->
+                      <div *ngIf="isCheckComment[i]">
+                        <div class="coment-area" *ngFor="let comment of post.commentSet ; index as j" style="margin-top: 0">
+                          <ul class="we-comet" *ngIf="comment.comment == null">
+                            <li>
+                              <div class="comet-avatar">
+                                <!--														Ảnh user commentPipe-->
+                                <img src="{{comment.user.avatar}}" alt=""
+                                     style="vertical-align: middle;width: 50px;height: 50px; border-radius: 50%">
+
+                              </div>
+                              <div class="we-comment">
+                                <div class="coment-head">
+                                  <div class="float-right" style="display: flex">
+                                    <div class="mr-2" *ngIf="isShown == comment.user.id"><a (click)="openDialogEdit(comment.id, post.id)" title="Sửa" style="cursor: pointer"><i
+                                      class="fa fa-edit"></i></a></div>
+                                    <div *ngIf="isShown == comment.user.id"><a (click)="openDialogDelete(comment.id)" title="Xóa" style="color: #dc3545; cursor: pointer"><i
+                                      class="fa fa-trash"></i></a></div>
+                                  </div>
+                                  <!--															Tên user commentPipe-->
+                                  <h5><a [routerLink]="['/profile/list-post/'+ comment.user.id]" >{{comment.user.fullName}}</a></h5>
+                                  <!--															Thời gian commentPipe-->
+                                  <span>{{comment.date | date: 'dd/MM/yyyy lúc h:mm a' }}</span>
+                                  <!--															Nút reply-->
+                                  <label [htmlFor]="comment.id" >
+                                    <a class="we-reply" title="" style="cursor: pointer" (click)="CheckParent(j)"><i
+                                      class="fa fa-reply"></i> Trả lời</a>
+                                  </label>
+                                </div>
+                                <!--														Nội dung commentPipe-->
+                                <p>{{comment.content}}</p>
+                                <img src="{{comment.img}}" style="height: 210px; width: 157px; border: 1px  ;
+                              -moz-border-radius: 10px;-webkit-border-radius: 10px;
+                              -ms-border-radius: 10px;
+                              -o-border-radius: 10px;
+                               border-radius: 10px;" *ngIf="comment.img !== null">
+                              </div>
+                              <!--													Comment Trả lời-->
+                              <div class="post-comment" id="hiden1"
+                                   style="display: flex; margin-top: 10px" *ngIf="isCheckReply[j]">
+                                <div class="comet-avatar">
+                                  <img
+                                    src="{{avatarUser}}"
+                                    alt="" style="vertical-align: middle;width: 50px;height: 50px; border-radius: 50%">
+                                </div>
+                                <div class="post-comt-box">
+                                  <form [formGroup]="formComment"
+                                        (ngSubmit)="createCommentParent(post.id, formComment.value, comment.id)">
+                                    <div style="position: relative">
+                                      <input [id]="comment.id" placeholder="Viết bình luận..." style="resize: none;border: 1px solid #eeeeee;
+                            border-radius: 6px 6px 0 0;padding: 10px;width: 100%;border-bottom: 0;
+                            background: #f3f3f3 none repeat scroll 0 0"
+                                             formControlName="content">
+                                      <div (click)="fileUploader.click()" class="add-smiles"><i class="fa fa-image"></i>
+                                      </div>
+                                    </div>
+                                    <br>
+                                    <img [src]="imgSrc" width="100px" height="100px" *ngIf="isCheckParent[comment.id] && imgSrc !== null">
+                                    <div class="item" style="clear: both">
+                                      <label class="col-2 float-left" for="imageComment">
+                                      </label>
+                                      <input hidden class="col-6 form-control float-left" type="file" accept="image/*"
+                                             #fileUploader
+                                             id="imageComment" formControlName="img"
+                                             (change)="showPreviewParent($event, comment.id)">
+                                    </div>
+
+                                    <!--                            <div class="add-smiles" style="margin-right: 20px">-->
+                                    <!--                              <i class="far fa-image"></i>-->
+                                    <!--                              <label class="fileContainer">-->
+                                    <!--                                <input type="file">-->
+                                    <!--                              </label>-->
+                                    <!--                            </div>-->
+                                    <!--                            <div class="add-smiles">-->
+                                    <!--                              <i class="far fa-smile-beam"></i>-->
+                                    <!--                            </div>-->
+                                    <input type="submit" style="position: absolute; left: -9999px"/>
+                                  </form>
+                                </div>
+                              </div>
+                              <ul *ngFor="let comment1 of commentChild">
+                                <li *ngIf="comment1.comment.id == comment.id">
+                                  <div class="comet-avatar">
+                                    <img src="{{comment1.user.avatar}}" alt=""
+                                         style="vertical-align: middle;width: 50px;height: 50px; border-radius: 50%">
+
+                                  </div>
+                                  <div class="we-comment">
+                                    <div class="coment-head">
+                                      <div class="float-right" style="display: flex">
+                                        <!--                                        <div class="mr-2" *ngIf="isShown == comment.user.id"><a href="#" title="Sửa"><i class="fa fa-edit"></i></a></div>-->
+                                        <div *ngIf="isShown == comment1.user.id"><a (click)="openDialogDelete(comment1.id)" title="Xóa" style="color: #dc3545; cursor: pointer"><i class="fa fa-trash"></i></a>
+                                        </div>
+                                      </div>
+                                      <h5><a [routerLink]="['/profile/list-post/'+ comment1.user.id]">{{comment1.user.fullName}}</a></h5>
+                                      <span>{{comment1.date | date: 'dd/MM/yyyy lúc h:mm a' }}</span>
+                                    </div>
+
+                                    <p>{{comment1.content}}</p>
+                                    <img src="{{comment1.img}}" style="height: 210px; width: 157px; border: 1px  ;
+                              -moz-border-radius: 10px;-webkit-border-radius: 10px;
+                              -ms-border-radius: 10px;
+                              -o-border-radius: 10px;
+                               border-radius: 10px;" *ngIf="comment1.img !== null">
+                                  </div>
+                                </li>
+
+                              </ul>
+
+                            </li>
+
+
+                          </ul>
+                          <!--                        <div *ngFor="let comment1 of commentChild">-->
+                          <!--                        <ul *ngIf="comment1.commentPipe.id == commentPipe.id">{{comment1.content}}</ul>-->
+                          <!--                        </div>-->
+                        </div>
+                      </div>
+                      <ul class="we-comet">
+                        <li>
+                          <a class="showmore underline" (click)="checkComment(i)" style="cursor: pointer">Hiển thị bình luận</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="lodmore">
+              <button class="btn-view btn-load-more" (click)="increaseSize()" *ngIf="size == listPost.length"></button>
+            </div>
+
+            <!-- centerl meta -->
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+

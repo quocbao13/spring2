@@ -1,0 +1,54 @@
+<div class="my-container">
+  <ng-template #customLoadingTemplate>
+  </ng-template>
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>
+</div>
+<div style="height: 60px; text-align: center">
+  <span style="color: #050505; font-size: 25px">Tạo bài viết</span>
+  <div (click)="close()" style="cursor:pointer; background: #E4E6EB; border-radius: 25px; width: 36px; height: 36px; float: right;
+   display: flex; align-items: center; justify-content: center">
+    <i class="fal fa-times" style="font-size: 30px"></i>
+  </div>
+</div>
+<form [formGroup]="myForm">
+  <div style="height: 70px; padding: 16px 0; border-top: 1px solid #eee">
+    <div style="float: left; margin-right: 10px">
+      <img src="{{avatarUser}}" style="height: 50px; width: 50px; border-radius: 25px">
+    </div>
+    <span>
+    <span style="color: #088DCD">{{fullNameUser}}</span><br>
+    <select [value]='0' formControlName="status" style="background: #E4E6EB; border: none; border-radius: 5px; padding: 4px 8px" class="fas">
+      <option [selected]="true" value='0'>&#xf023; &nbsp;Chỉ mình tôi</option>
+      <option value='1'>&#xf500; &nbsp;Bạn bè</option>
+      <option value='2'>&#xf57e; &nbsp;Công khai</option>
+    </select>
+  </span>
+  </div>
+  <div class="form-group">
+  <textarea formControlName="content" autofocus #element [(ngModel)]="content"  [value]="emotion ? emotion : ''" id="abc" style="font-size: 25px;
+  margin-top: 10px; height: 150px; width: 100%; resize: none; border: none" placeholder="Bạn đang nghĩ gì?"></textarea>
+  </div>
+  <span *ngFor='let url of images' >
+    <span style="position: relative;">
+      <img class="image-display" [src]="url"  style="margin-left: 10px; height:130px; width:130px">
+      <span class="close-x" style="cursor: pointer;" (click)="deleteImage(url)">
+        <i class="fal fa-times" style="font-size: 30px"></i>
+      </span>
+    </span>
+  </span>
+  <div style="text-align: right">
+    <input formControlName="file" #file type="file" multiple="" (change)="onFileChange($event)" style="display:none;">
+
+    <i (click)="activeEmoji()" style="font-size: 30px; color: yellow; margin-right: 10px" class="far fa-meh"></i>
+    <i (click)="file.click()" style="font-size: 30px; color: #28a745" class="fas fa-image"></i>
+    <emoji-mart *ngIf="emoji" (emojiClick)="handleSelection($event, element)"></emoji-mart>
+  </div>
+  <div style="width: 100%; margin-top: 10px">
+    <button type="submit" class="btn btn-primary" style="width: 100%" (click)="submit()" [disabled]="myForm.controls.file.invalid && myForm.controls.content.invalid">Đăng</button>
+  </div>
+  <div style="width: 100%; margin-top: 10px">
+    <p style="color: red">{{messageErrorImage}}</p>
+  </div>
+</form>
+
+

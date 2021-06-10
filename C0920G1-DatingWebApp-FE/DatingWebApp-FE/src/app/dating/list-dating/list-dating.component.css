@@ -1,0 +1,21 @@
+a.btn-click-check-create {
+  top: 280px;
+  transition: 0.4s;
+}
+
+a.btn-click-check-dislike {
+  top: 280px;
+  transition: 0.4s;
+}
+
+a.btn-click-check-dislike:hover {
+  background: red;
+  transition: 0.4s;
+}
+
+a.btn-click-check-create:hover {
+  background: #2f5b9d;
+  transition: 0.4s;
+}
+
+/*# sourceMappingURL=list-dating.component.css.map */

@@ -1,0 +1,92 @@
+<div class="theme-layout">
+  <section>
+    <div class="gap gray-bg">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="row" id="page-contents">
+              <div class="col-lg-3">
+                <aside class="sidebar static">
+                  <div class="widget">
+                    <h4 class="widget-title">Phím tắt</h4>
+                    <ul class="naves">
+                      <li>
+                        <i class="ti-clipboard"></i>
+                        <a href="" title="">Bảng tin</a>
+                      </li>
+                      <li>
+                        <i class="ti-mouse-alt"></i>
+                        <a href="" title="">Hộp thư</a>
+                      </li>
+                      <li>
+                        <i class="ti-files"></i>
+                        <a href="" title="">Trang cá nhân</a>
+                      </li>
+                      <li>
+                        <i class="ti-user"></i>
+                        <a href="" title="">Bạn bè</a>
+                      </li>
+                      <li>
+                        <i class="ti-image"></i>
+                        <a href="" title="">Ảnh</a>
+                      </li>
+                      <li>
+                        <i class="ti-video-camera"></i>
+                        <a href="" title="">Video</a>
+                      </li>
+                      <li>
+                        <i class="ti-comments-smiley"></i>
+                        <a href="" title="">Tin nhắn</a>
+                      </li>
+                      <li>
+                        <i class="ti-bell"></i>
+                        <a href="" title="">Thông báo</a>
+                      </li>
+                      <li>
+                        <i class="ti-share"></i>
+                        <a href="" title="">Bạn bè quanh đây</a>
+                      </li>
+                      <li>
+                        <i class="ti-power-off"></i>
+                        <a href="" title="">Logout</a>
+                      </li>
+                    </ul>
+                  </div>
+                </aside>
+              </div>
+              <div class="col-lg-6">
+                <div class="central-meta">
+                  <div class="groups">
+                    <input placeholder="Tìm kiếm" type="text"(keyup.enter)="search(0)" aria-describedby="basic-addon2" [(ngModel)]="searchInput">
+                  </div>
+                  <div class="groups mt-3">
+                    <span><i class="fa fa-users"></i>Quản lý nhóm</span>
+                    <a routerLink="/group-add" class="float-right"><i class="fas fa-plus"></i>Tạo mới nhóm</a>
+                  </div>
+                  <ul class="nearby-contct" *ngFor="let group of groups, let i = index">
+                    <li>
+                      <div class="nearly-pepls">
+                        <figure>
+                          <a><img src="{{group.backgroundGroup}}" alt=""></a>
+                        </figure>
+                        <div class="pepl-info">
+                          <h4><a routerLink="/group/{{group.id}}/post">{{group.name}}</a></h4>
+                          <span>Nhóm công khai</span>
+                          <span class="mt-2" >{{group.countUser}} thành viên</span>
+                          <a (click)=openDeleteDialog(group.id) title="" class="add-delete" data-ripple="" style="color: white; cursor: pointer" >Xóa nhóm</a>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                  <div class="lodmore"><button class="btn-view btn-load-more" (click)="onNext()"></button></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+

@@ -1,0 +1,128 @@
+<div class="theme-layout">
+  <section>
+    <div class="gap gray-bg">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="row" id="page-contents">
+              <div class="col-lg-3">
+                <aside class="sidebar static">
+                  <!--side bar-->
+                  <div class="widget">
+                    <h4 class="widget-title">SHORTCUTS</h4>
+                    <ul class="naves">
+<!--                      <li>-->
+<!--                        <i class="ti-clipboard"></i>-->
+<!--                        <a href="#" title="">Nguồn Cấp Dữ Liệu Mới</a>-->
+<!--                      </li>-->
+                      <li>
+                        <i class="ti-mouse-alt"></i>
+                        <a title="" [routerLink]="['/dating']">Hẹn hò</a>
+                      </li>
+                      <li>
+                        <i class="ti-files"></i>
+                        <a title="" [routerLink]="['/profile']">Trang của tôi</a>
+                      </li>
+                      <li>
+                        <i class="ti-user"></i>
+                        <a title="" [routerLink]="['/profile/friend']">Bạn bè</a>
+                      </li>
+                      <li>
+                        <i class="ti-image"></i>
+                        <a title="" href="images.html">Hình ảnh</a>
+                      </li>
+<!--                      <li>-->
+<!--                        <i class="ti-video-camera"></i>-->
+<!--                        <a href="#" title="">Video</a>-->
+<!--                      </li>-->
+<!--                      <li>-->
+<!--                        <i class="ti-comments-smiley"></i>-->
+<!--                        <a href="#" title="">Tin Nhắn</a>-->
+<!--                      </li>-->
+<!--                      <li>-->
+<!--                        <i class="ti-bell"></i>-->
+<!--                        <a href="#" title=""> Thông Báo</a>-->
+<!--                      </li>-->
+<!--                      <li>-->
+<!--                        <i class="ti-share"></i>-->
+<!--                        <a href="#" title="">Những Người Lân Cận</a>-->
+<!--                      </li>-->
+<!--                      <li>-->
+<!--                        <i class="fa fa-bar-chart-o"></i>-->
+<!--                        <a href="#" title="">Hiểu Biết Sâu Sắc</a>-->
+<!--                      </li>-->
+<!--                      <li>-->
+<!--                        <i class="ti-power-off"></i>-->
+<!--                        <a href="#" title="">Đăng Xuất</a>-->
+<!--                      </li>-->
+                    </ul>
+                  </div><!-- Shortcuts -->
+                </aside>
+              </div><!-- sidebar -->
+              <div class="col-lg-6">
+                <div class="central-meta">
+                  <div class="row">
+                    <div class="col-6"><h2><a href="#" (click)="listMember()">Danh sách thành viên</a></h2></div>
+                    <div class="col-6">
+                      <div class="mh-head second">
+                        <div class="mh-form">
+                          <input (keyup.enter)="search()" (change)="userNameSearch = $event.target.value"
+                                 placeholder="Tìm kiếm theo tên"/>
+                          <a (click)="search()" class="fa fa-search"></a>
+                        </div>
+                        <span *ngIf="checkSearch" style="color: red">{{notificationSearch}}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <hr>
+                  <div class="frnds">
+
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                      <div class="tab-pane active fade show " id="frends">
+                        <ul *ngFor="let member of listMemberDTO" class="nearby-contct">
+                          <li>
+                            <div class="nearly-pepls">
+                              <figure>
+                                <a href="time-line.html" title=""><img
+                                  src="{{member.avatar}}" style="width: 100px; height: 70px" alt=""></a>
+                              </figure>
+                              <div class="pepl-info">
+                                <h3><a href="#" title="">{{member.fullName}}</a>
+                                </h3>
+
+                                <span style="color: black"><i
+                                  class="far fa-envelope"></i> {{member.email}}</span>
+                                <span class="pt-3" style="color: black"><i
+                                  class="fas fa-phone"></i> {{member.phone}}</span>
+
+                                <span *ngIf="(!member.statusLock && member.numOfViolations!==0)" class="pt-3"><a [routerLink]="['/report/',member.userId]" style="color: red">
+                                                                    <i class="fas fa-exclamation-triangle"></i>
+                                                                    Vi phạm: {{member.numOfViolations}}
+                                                                </a></span>
+                                  <span class="pt-3" *ngIf="member.statusLock" style="color: red">Đã bị khoá</span>
+                                  <span class="pt-3" *ngIf="(member.dateUnBan!=null)" style="color: red">Mở khoá: {{member.dateUnBan | date:'short'}}</span>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                        <div class="lodmore" *ngIf="check1">
+                          <button (click)="loadMore()" class="btn-view btn-load-more"></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-3">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
